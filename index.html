@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>フォビアムービーサーチ</title>
+    <!-- Google Fonts: Inter および Playfair Display を追加 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <!-- 外部CSSファイルへのリンク -->
+    <link rel="stylesheet" href="src/style.css">
+    <!-- Font Awesome アイコンライブラリ -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Google AdSense スクリプト (HTMLのheadに追加) -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1387560637754446"
+      crossorigin="anonymous"></script>
+</head>
+<body>
+
+    <!-- ヘッダーセクション -->
+    <header>
+        <div class="container header-container"> <!-- header-container クラスを追加 -->
+            <a href="#" id="home-link" class="site-branding"> <!-- site-branding クラスを追加 -->
+                <img src="assets/images/logo.png" alt="ロゴ" class="logo">
+                <div class="site-title-area"> <!-- site-title-area を追加 -->
+                    <h1 class="site-title" lang="ja">フォビアムービーサーチ <span class="beta-tag">β版</span></h1>
+                    <p class="site-description" lang="ja">フォビア（恐怖症）を持つ方のための映画情報サイト</p>
+                </div>
+            </a>
+            <nav class="header-nav"> <!-- header-nav クラスを追加 -->
+                <!-- Feature Buttons -->
+                <button class="nav-button btn" id="phobia-directors-btn" lang="ja">フォビアディレクター</button> <!-- btn クラスを追加 -->
+                <button class="nav-button btn" id="legend-phobia-btn" lang="ja">レジェンドフォビアムービー</button> <!-- btn クラスを追加 -->
+            </nav>
+        </div>
+    </header>
+
+    <!-- メインコンテンツセクション -->
+    <main class="container"> <!-- mainタグにcontainerクラスを追加 -->
+        <!-- 検索コンテナ -->
+        <section id="search-section"> <!-- sectionタグを追加 -->
+            <div class="search-bar">
+                <input type="text" id="search-input" placeholder="タイトル、出演者、監督名で検索..." lang="ja">
+                <button id="search-button" class="btn" lang="ja">検索</button> <!-- btn クラスを追加 -->
+            </div>
+        </section>
+
+        <!-- 映画カテゴリタブ -->
+        <div id="movie-category-tabs">
+            <!-- btn クラスを追加 -->
+            <button class="tab-btn btn active" data-category="now_playing" lang="ja">上映中の映画</button>
+            <button class="tab-btn btn" data-category="popular" lang="ja">人気の映画</button>
+            <button class="tab-btn btn" data-category="upcoming" lang="ja">公開予定の映画</button>
+            <button class="tab-btn btn" data-category="top_rated" lang="ja">評価の高い映画</button>
+        </div>
+
+        <!-- 映画リスト表示エリア -->
+        <section id="movie-list-section"> <!-- sectionタグを追加 -->
+            <div id="movie-list" class="movie-grid"> <!-- movie-grid クラスを追加 -->
+                <!-- 映画カードはJavaScriptによってここに動的に追加されます -->
+                <p style="text-align: center; color: #777;" lang="ja">映画情報を読み込み中...</p>
+            </div>
+
+            <!-- もっと見るボタンコンテナ -->
+            <div id="load-more-container">
+                <button id="load-more-btn" class="load-more-button btn" lang="ja">もっと見る</button> <!-- btn クラスを追加 -->
+            </div>
+        </section>
+    </main>
+
+    <!-- フッターセクション -->
+    <footer>
+        <div class="container footer-content"> <!-- footer-content クラスを追加 -->
+            <div class="footer-links footer-nav"> <!-- footer-nav クラスも追加 -->
+                <!-- footer-btn クラスを追加 -->
+                <a href="#" class="footer-btn btn" lang="ja">ホーム</a> <!-- id="home-link" を削除して重複を解消 -->
+                <a href="#" id="about-link" class="footer-btn btn" data-info-type="about" lang="ja">サイト説明</a>
+                <a href="#" id="disclaimer-link" class="footer-btn btn" data-info-type="disclaimer" lang="ja">免責事項</a>
+                <a href="#" id="privacy-link" class="footer-btn btn" data-info-type="privacy" lang="ja">プライバシーポリシー</a>
+                <a href="#" id="guideline-link" class="footer-btn btn" data-info-type="guideline" lang="ja">投稿ガイドライン</a>
+                <a href="#" id="faq-link" class="footer-btn btn" data-info-type="faq" lang="ja">FAQ</a>
+                <a href="https://same-sunflower-d44.notion.site/20d0d0e1f57b80bd9af2c6e925aa0c20" target="_blank" class="footer-btn btn" lang="ja">お問い合わせ</a>
+            </div>
+            <div class="footer-credits">
+                <p lang="ja">© 2025 フォビアムービーサーチ All Rights Reserved.</p>
+                <div class="tmdb-credit">
+                    <p>This product uses the TMDB API but is not endorsed or certified by TMDB.</p>
+                    <img src="assets/images/TMDB.svg" alt="TMDB Logo" class="tmdb-logo">
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- モーダルオーバーレイとポップアップ -->
+    <div id="modal-overlay" class="hidden">
+        <!-- 映画詳細モーダル -->
+        <div id="movie-detail-modal" class="modal-content hidden">
+            <!-- 映画の詳細情報がJavaScriptによってここに動的に追加されます -->
+            <button class="close-modal-btn">&times;</button>
+            <!-- 初期コンテンツはJSで上書きされるため、簡素化 -->
+        </div>
+        <!-- 情報モーダル (フッターリンク用) -->
+        <div id="info-modal" class="modal-content hidden">
+            <button class="close-modal-btn">&times;</button>
+            <h2 id="info-modal-title" lang="ja"></h2>
+            <div id="info-modal-body" lang="ja"></div>
+        </div>
+    </div>
+
+    <!-- 外部JavaScriptファイルへのリンク -->
+    <script src="src/script.js"></script>
+</body>
+</html>

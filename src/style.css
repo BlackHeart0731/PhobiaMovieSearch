@@ -1,0 +1,824 @@
+/* フォントの定義 */
+/* 日本語フォント: しねきゃぷしょん */
+@font-face {
+    font-family: 'cinecaption';
+    src: url('../fonts/cinecaption226.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* 英語フォント: Playfair Display (Google Fontsから読み込むため、HTMLの<head>でリンクが必要です) */
+/* HTMLで<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">を追加してください */
+
+/* 基本スタイル */
+body {
+    font-family: 'cinecaption', 'Playfair Display', sans-serif; /* 日本語フォントを優先し、英語フォント、汎用フォントをフォールバック */
+    margin: 0;
+    padding: 0;
+    background-color: #f8f8f8; /* ボディは白に近いグレー */
+    color: #333;
+    line-height: 1.6;
+}
+
+/* 日本語テキストにcinecaptionを強制適用するクラス（必要に応じて、lang="ja"属性を使うことを推奨） */
+[lang="ja"] {
+    font-family: 'cinecaption', sans-serif;
+}
+
+/* 英語テキストにPlayfair Displayを強制適用するクラス（必要に応じて、lang="en"属性を使うことを推奨） */
+[lang="en"] {
+    font-family: 'Playfair Display', serif;
+}
+
+
+.container { /* index.htmlのmainタグにこのクラスがあるので、そのまま残します */
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* ヘッダーセクション */
+header {
+    background-color: #1a242f; /* 濃い青 */
+    color: #ecf0f1;
+    padding: 15px 0;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    border-bottom-left-radius: 15px; /* モダンレトロな角丸 */
+    border-bottom-right-radius: 15px;
+    position: sticky;
+    top: 0;
+    z-index: 999;
+    /* ヘッダー内部のレイアウト調整 */
+    display: flex; /* 追加 */
+    justify-content: center; /* 追加 */
+    align-items: center; /* 追加 */
+    flex-wrap: wrap; /* 追加 */
+}
+
+/* header .container を .header-container に変更 (HTMLの変更と合わせる) */
+header .container { /* index.htmlのheader内のdivにcontainerクラスがあるため、こちらを適用 */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+
+.site-branding { /* a#home-link にこのスタイルを適用するため、セレクタ名を変更 */
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: #ecf0f1;
+    transition: transform 0.2s ease;
+    padding: 5px 0; /* クリック領域を確保 */
+}
+
+.site-branding:hover {
+    transform: translateY(-2px); /* ホバーで若干浮き上がる */
+}
+
+.logo {
+    height: 50px; /* ロゴサイズ調整 */
+    width: auto;
+    margin-right: 15px;
+    border-radius: 10px; /* ロゴにも角丸 */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.site-title-area { /* HTMLの構造に合わせて追加 */
+    display: flex;
+    flex-direction: column;
+}
+
+.site-title-area h1 {
+    font-family: 'cinecaption', sans-serif;
+    margin: 0;
+    font-size: 2.2em; /* サイト名 */
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+}
+
+.beta-tag {
+    font-size: 0.5em;
+    vertical-align: super;
+    background-color: #e74c3c; /* 赤系 */
+    color: white;
+    padding: 3px 8px;
+    border-radius: 5px;
+    margin-left: 10px;
+    font-family: 'Playfair Display', serif; /* 英語フォント */
+}
+
+.site-description {
+    font-family: 'cinecaption', sans-serif;
+    margin: 0;
+    font-size: 0.9em;
+    color: #bdc3c7;
+}
+
+/* header nav を .header-nav に変更 (HTMLの変更と合わせる) */
+header nav { /* HTMLのheader navタグに直接適用するため変更 */
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    justify-content: flex-end; /* 右寄せ */
+}
+
+/* 各種ボタンの基本スタイル（共通化） */
+/* nav-button, action-button, tab-btn, feature-btn, footer-link-button を .btn に統合し、個別の調整はクラスで */
+.btn { /* 新しい共通ボタンクラス */
+    background-color: #34495e; /* 明るすぎない青系 */
+    color: #ecf0f1;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px; /* 角丸 */
+    cursor: pointer;
+    font-size: 1em;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2); /* 影 */
+    text-decoration: none; /* リンクボタン用 */
+    display: inline-flex; /* 中央揃えのため */
+    align-items: center;
+    justify-content: center;
+    font-family: 'cinecaption', sans-serif; /* 日本語フォント */
+    position: relative; /* 疑似要素用 */
+    overflow: hidden; /* 疑似要素がはみ出さないように */
+}
+
+.btn:hover {
+    background-color: #2c3e50; /* ホバーで少し暗く */
+    transform: translateY(-3px); /* 浮き上がるアニメーション */
+    box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+}
+
+/* レトロなボタンの光沢効果（疑似要素） */
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -75%;
+    width: 50%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.2); /* 白い光沢 */
+    transform: skewX(-20deg);
+    transition: all 0.7s ease;
+}
+
+.btn:hover::before {
+    left: 125%; /* ホバーで移動 */
+}
+
+/* 個別のボタンクラスに共通スタイルを適用 */
+.nav-button, .action-button, .tab-btn, .feature-btn, .footer-btn { /* HTMLとクラス名を合わせる */
+    /* .btn に統合されたため、これらは追加のスタイルのみ記述 */
+}
+
+
+/* 検索セクション */
+#search-section {
+    padding: 30px 0;
+    text-align: center;
+    margin-top: 30px;
+    background: linear-gradient(135deg, #e0e0e0, #f0f0f0); /* モダンなグラデーション */
+    border-radius: 15px;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+}
+
+.search-bar {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    max-width: 700px;
+    margin: 0 auto;
+    flex-wrap: wrap; /* レスポンシブ対応 */
+}
+
+#search-input {
+    flex-grow: 1;
+    padding: 12px 20px;
+    border: 2px solid #a0a0a0; /* レトロな太めの枠線 */
+    border-radius: 10px;
+    font-size: 1.1em;
+    background-color: #fff;
+    box-shadow: inset 0 2px 5px rgba(0,0,0,0.1);
+    font-family: 'Playfair Display', serif; /* 英語フォント */
+    min-width: 200px; /* 小さすぎるのを防ぐ */
+}
+
+#search-input::placeholder {
+    color: #999;
+}
+
+#search-input:focus {
+    border-color: #3498db;
+    box-shadow: 0 0 0 4px rgba(52, 152, 219, 0.3);
+    outline: none;
+}
+
+/* カテゴリタブ */
+#movie-category-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin: 30px 0;
+    padding: 15px;
+    background-color: #fff;
+    border-radius: 15px;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+    flex-wrap: wrap; /* レスポンシブ対応 */
+}
+
+.tab-btn {
+    /* .btn に統合されたため、残りは差分のみ */
+    background-color: #ecf0f1; /* 明るいグレー */
+    color: #555;
+    padding: 12px 22px;
+    border: 1px solid #ccc; /* 枠線 */
+    border-radius: 8px;
+    font-size: 1em;
+    font-weight: 600;
+}
+
+.tab-btn.active {
+    background-color: #3498db; /* アクティブは青 */
+    color: white;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.25);
+    border-color: #3498db;
+    transform: translateY(-2px); /* アクティブ時も浮き上がる */
+}
+
+.tab-btn:hover:not(.active) {
+    background-color: #dcdcdc;
+    transform: translateY(-2px);
+}
+
+/* 映画リスト */
+#movie-list-section {
+    padding: 20px 0;
+    text-align: center;
+}
+
+.movie-grid { /* index.htmlの#movie-listにこのクラスがあるため変更 */
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); /* カードサイズ調整 */
+    gap: 30px;
+    padding: 20px 0;
+}
+
+.movie-card {
+    background-color: #fff;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15); /* より強い影 */
+    overflow: hidden;
+    text-align: center;
+    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.4s ease; /* スムーズなアニメーション */
+    cursor: pointer;
+    position: relative;
+    border: 1px solid #eee;
+}
+
+.movie-card:hover {
+    transform: scale(1.05) translateY(-5px); /* カーソルで拡大＆浮き上がる */
+    box-shadow: 0 12px 25px rgba(0,0,0,0.25);
+}
+
+.movie-card img {
+    width: 100%;
+    height: 330px; /* 固定高さを少し上げる */
+    object-fit: cover;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.movie-rating {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background-color: rgba(52, 152, 219, 0.95); /* 青で透明度を少し抑える */
+    color: white;
+    padding: 6px 12px;
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: 0.9em;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    font-family: 'Playfair Display', serif; /* 英語フォント */
+}
+
+.movie-card h3 {
+    font-family: 'cinecaption', sans-serif; /* 日本語フォント */
+    font-size: 1.2em;
+    margin: 15px 15px 8px;
+    color: #2c3e50;
+    min-height: 2.8em; /* 2行表示のための最小高さを確保 */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+.movie-card p {
+    font-family: 'cinecaption', sans-serif; /* 日本語フォント */
+    font-size: 0.9em;
+    color: #777;
+    margin: 0 15px 15px;
+}
+
+.load-more-button {
+    /* .btn に統合されたため、残りは差分のみ */
+    background-color: #2ecc71; /* 緑系 */
+    color: white;
+    padding: 15px 35px;
+    font-size: 1.1em;
+    margin-top: 40px;
+    display: block; /* 中央揃えのため */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.load-more-button:hover {
+    background-color: #27ae60;
+}
+
+.load-more-button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+    box-shadow: none;
+    transform: none;
+}
+
+/* フッターセクション */
+footer {
+    background-color: #555; /* 見やすさのあるグレー */
+    color: #f8f8f8;
+    padding: 30px 0;
+    text-align: center;
+    margin-top: 50px;
+    box-shadow: 0 -4px 10px rgba(0,0,0,0.3);
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+}
+
+.footer-content { /* index.htmlのfooterにこのクラスはないので削除またはHTMLを修正 */
+    display: flex;
+    flex-direction: column; /* 縦並び */
+    align-items: center;
+    gap: 20px;
+}
+
+/* footer nav を .footer-nav に変更 (HTMLの変更と合わせる) */
+footer .footer-nav { /* HTMLのfooter navタグに直接適用するため変更 */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px; /* ボタン間のスペース */
+    margin-bottom: 20px;
+}
+
+.footer-btn { /* HTMLとクラス名を合わせる */
+    /* .btn に統合されたため、残りは差分のみ */
+    background-color: #777; /* フッターに合わせた暗めのボタン色 */
+    color: #f8f8f8;
+    padding: 10px 18px;
+    font-size: 0.9em;
+}
+
+.footer-btn:hover {
+    background-color: #666;
+    transform: translateY(-2px);
+}
+
+.footer-credits {
+    font-size: 0.85em;
+    color: #ccc;
+}
+
+.tmdb-credit {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.tmdb-logo {
+    height: 30px;
+    width: auto;
+}
+
+/* モーダル共通スタイル */
+#modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.8); /* より濃いオーバーレイ */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    padding: 20px;
+    overflow-y: auto;
+    backdrop-filter: blur(5px); /* モーダルの背景をぼかす */
+}
+
+/* hidden クラスが適用された要素を確実に非表示にする */
+#modal-overlay.hidden,
+.modal-content.hidden { 
+    display: none !important; 
+}
+
+.modal-content {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+    max-width: 900px; /* モーダルの最大幅を広げる */
+    width: 100%;
+    position: relative;
+    overflow-y: auto;
+    max-height: 90vh;
+    animation: fadeInScale 0.3s ease-out forwards; /* フェードインとスケールアップ */
+}
+
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.close-modal-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: none;
+    border: none;
+    font-size: 2.5em; /* 大きいクローズボタン */
+    color: #aaa;
+    cursor: pointer;
+    transition: color 0.3s ease, transform 0.2s ease;
+    line-height: 1;
+}
+
+.close-modal-btn:hover {
+    color: #e74c3c; /* ホバーで赤く */
+    transform: rotate(90deg); /* 回るアニメーション */
+}
+
+/* 映画詳細モーダル */
+#movie-detail-modal #movie-detail-top-content {
+    display: flex;
+    gap: 40px; /* ギャップを広げる */
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+    align-items: flex-start; /* 上揃え */
+}
+
+#movie-detail-modal #movie-detail-poster {
+    flex-shrink: 0; /* 縮まないように */
+}
+
+#movie-detail-modal #movie-detail-poster img {
+    max-width: 280px; /* ポスターサイズを少し大きく */
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+    display: block;
+    margin: 0 auto;
+}
+
+#movie-detail-modal #movie-detail-info {
+    flex-grow: 1;
+    min-width: 280px; /* 情報部分の最小幅 */
+}
+
+#movie-detail-modal h2 {
+    font-family: 'cinecaption', sans-serif;
+    font-size: 2.5em;
+    margin-top: 0;
+    color: #2c3e50;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+}
+
+#movie-detail-modal p {
+    font-family: 'cinecaption', sans-serif;
+    font-size: 1.05em;
+    line-height: 1.7;
+    color: #555;
+    margin-bottom: 12px;
+}
+
+#movie-detail-modal strong {
+    color: #333;
+    font-weight: 700;
+}
+
+/* 区切り線 */
+.modal-content > div[style*="border-top"] {
+    border-top: 1px dashed #ddd !important; /* 点線でレトロ感 */
+    margin: 25px 0 !important;
+}
+
+/* 恐怖要素セクション */
+#phobia-section h3 {
+    font-family: 'cinecaption', sans-serif;
+    font-size: 1.8em;
+    color: #2c3e50;
+    margin-top: 30px;
+    margin-bottom: 20px;
+    border-bottom: 3px solid #3498db;
+    padding-bottom: 8px;
+    display: inline-block;
+}
+
+#phobia-reports-list {
+    background-color: #f0f6fc; /* 明るい青系背景 */
+    padding: 20px;
+    border-radius: 10px;
+    border: 1px solid #cfe2f3;
+    margin-bottom: 25px;
+}
+
+.phobia-item {
+    background-color: #e7f2fa;
+    border: 1px solid #d4e8f7;
+    padding: 12px 20px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    font-family: 'cinecaption', sans-serif;
+    font-size: 1.1em;
+}
+
+.phobia-item:hover {
+    background-color: #d1e5f5;
+    transform: translateY(-2px); /* ホバーで少し浮き上がる */
+}
+
+.phobia-badge {
+    background-color: #3498db;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 15px; /* 丸いバッジ */
+    font-size: 0.8em;
+    margin-left: 15px;
+    font-family: 'Playfair Display', serif; /* 英語フォント */
+    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+
+.accordion-icon {
+    font-size: 1em;
+    transition: transform 0.2s ease;
+    margin-left: 10px;
+}
+
+.phobia-details {
+    background-color: #e0e9f3; /* 詳細表示時の背景色 */
+    border-left: 4px solid #3498db;
+    padding: 15px 25px;
+    margin-left: 20px;
+    margin-bottom: 15px;
+    border-radius: 0 0 10px 10px;
+    font-family: 'cinecaption', sans-serif;
+}
+
+.phobia-report-entry {
+    border-bottom: 1px dashed #b1c7dc;
+    padding-bottom: 12px;
+    margin-bottom: 12px;
+}
+.phobia-report-entry:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+    margin-bottom: 0;
+}
+
+#phobia-form {
+    background-color: #f8f8f8;
+    padding: 25px;
+    border-radius: 10px;
+    border: 1px solid #eee;
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.05); /* フォームに内側の影 */
+}
+
+#phobia-form h3 {
+    font-family: 'cinecaption', sans-serif;
+    margin-top: 0;
+    color: #2c3e50;
+    font-size: 1.6em;
+    border-bottom: none;
+    padding-bottom: 0;
+    margin-bottom: 20px;
+}
+
+#phobia-select-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px; /* ギャップを少し広げる */
+    margin-bottom: 20px;
+}
+
+#phobia-select-container label {
+    background-color: #dde1e5;
+    padding: 10px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    border: 1px solid #c9cfd4;
+    font-family: 'cinecaption', sans-serif;
+}
+
+#phobia-select-container label:hover {
+    background-color: #c9cfd4;
+    transform: translateY(-1px);
+}
+
+#phobia-select-container input[type="checkbox"] {
+    margin-right: 8px;
+    transform: scale(1.2); /* チェックボックスを少し大きく */
+}
+
+#phobia-other-text,
+#phobia-details-text,
+#phobia-time-text {
+    width: calc(100% - 24px); /* パディングとボーダーを考慮 */
+    padding: 12px;
+    margin-bottom: 18px;
+    border: 2px solid #ccc; /* 太めの枠線 */
+    border-radius: 8px;
+    font-size: 1em;
+    box-shadow: inset 0 1px 4px rgba(0,0,0,0.08);
+    font-family: 'Playfair Display', serif; /* 英語フォント */
+}
+
+#phobia-details-text {
+    min-height: 100px; /* 高さを確保 */
+    resize: vertical;
+}
+
+#phobia-form button[type="submit"] {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 14px 30px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 1.1em;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    font-family: 'cinecaption', sans-serif;
+}
+
+#phobia-form button[type="submit"]:hover {
+    background-color: #2980b9;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+}
+
+#phobia-form #form-message {
+    margin-top: 15px;
+    font-size: 0.95em;
+    font-weight: 600;
+    text-align: center;
+    font-family: 'cinecaption', sans-serif;
+}
+
+
+/* レスポンシブ調整 */
+@media (max-width: 900px) {
+    .header-container {
+        flex-direction: column;
+        text-align: center;
+    }
+    .site-branding {
+        margin-right: 0;
+        margin-bottom: 15px;
+    }
+    .header-nav {
+        justify-content: center;
+        width: 100%;
+    }
+    #movie-detail-modal #movie-detail-top-content {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 20px;
+    }
+    #movie-detail-modal #movie-detail-poster img {
+        max-width: 200px;
+    }
+    #movie-detail-modal h2 {
+        font-size: 2em;
+    }
+    .modal-content {
+        padding: 25px;
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 0 15px;
+    }
+    .site-title-area h1 {
+        font-size: 1.8em;
+    }
+    .beta-tag {
+        font-size: 0.4em;
+        padding: 2px 6px;
+    }
+    .nav-button, .action-button, .tab-btn, .feature-btn, .footer-link-button {
+        font-size: 0.9em;
+        padding: 8px 15px;
+    }
+    .search-bar {
+        flex-direction: column;
+        gap: 10px;
+    }
+    #search-input, #search-button {
+        width: 100%;
+        max-width: none;
+    }
+    .movie-grid {
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+        gap: 20px;
+    }
+    .movie-card img {
+        height: 270px;
+    }
+    #phobia-section h3 {
+        font-size: 1.5em;
+    }
+    #phobia-form h3 {
+        font-size: 1.4em;
+    }
+    #phobia-form input,
+    #phobia-form textarea,
+    #phobia-form button {
+        font-size: 0.9em;
+        padding: 10px;
+    }
+    .footer-nav {
+        gap: 10px;
+    }
+    .footer-link-button {
+        padding: 8px 12px;
+        font-size: 0.8em;
+    }
+}
+
+@media (max-width: 480px) {
+    .site-title-area h1 {
+        font-size: 1.5em;
+    }
+    .logo {
+        height: 40px;
+        margin-right: 10px;
+    }
+    .site-description {
+        font-size: 0.8em;
+    }
+    .nav-button {
+        font-size: 0.8em;
+        padding: 6px 10px;
+    }
+    .tab-btn {
+        font-size: 0.8em;
+        padding: 6px 10px;
+    }
+    .movie-grid {
+        grid-template-columns: 1fr; /* 1列表示 */
+        gap: 15px;
+    }
+    .movie-card img {
+        height: 300px;
+    }
+    #movie-detail-modal h2 {
+        font-size: 1.8em;
+    }
+    #movie-detail-modal p {
+        font-size: 0.9em;
+    }
+    .phobia-item {
+        font-size: 1em;
+        padding: 10px 15px;
+    }
+    .phobia-badge {
+        font-size: 0.7em;
+        padding: 3px 6px;
+    }
+    .modal-content {
+        padding: 15px;
+    }
+}
