@@ -12,7 +12,7 @@ const IMAGE_BASE_URL = 'https://image.tmdb.org/t/p/w500';
 // Supabase Edge Function Endpoints (Change according to your environment)
 // ※These URLs need to be set correctly upon actual deployment.
 // デプロイしたSupabase Edge Functionの正確なURLに置き換えてください
-const SUBMIT_PHOBIA_URL = 'https://yzkmduhebhwkkywhvakr.supabase.co/functions/v1/submit-phobia-report'; // 末尾の /submit は不要です
+const SUBMIT_PHOBIA_URL = 'https://yzkmduhebhwkkywhvqkr.supabase.co/functions/v1/submit-phobia-report'; // 末尾の /submit は不要です
 const GET_PHOBIA_URL = 'YOUR_SUPABASE_EDGE_FUNCTION_URL/get-by-movie'; // Assumed to return dummy data
 const GET_FEATURE_URL = 'YOUR_SUPABASE_EDGE_FUNCTION_URL/features'; // Assumed to return dummy data
 
