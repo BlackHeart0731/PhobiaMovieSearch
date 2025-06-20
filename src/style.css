@@ -18,7 +18,7 @@ body {
     background-color: #f8f8f8; /* ボディは白に近いグレー */
     color: #333;
     line-height: 1.6;
-    overflow-x: hidden; /* ★追加: 横方向のスクロールを無効にする */
+    overflow-x: hidden; /* ★修正: 横方向のスクロールを無効にする */
 }
 
 /* 日本語テキストにcinecaptionを適用するクラス/属性セレクタ */
@@ -761,7 +761,7 @@ footer .footer-nav { /* HTMLのfooter navタグに直接適用するため変更
         padding: 25px;
         /* ★修正: モーダルの最大幅と高さを調整 */
         max-width: 90vw; 
-        max-height: 80vh; 
+        max-height: 80vh; /* 少し高さを小さく */
     }
 }
 
@@ -793,7 +793,7 @@ footer .footer-nav { /* HTMLのfooter navタグに直接適用するため変更
         width: 100%; /* 確実に幅を100%に */
         flex-direction: column; /* ボタンを縦に並べる */
         align-items: center; /* 縦並びのボタンを中央寄せ */
-        gap: 3px; /* ★修正: 縦並びのボタン間のギャップを狭める */
+        gap: 2px; /* ★修正: 縦並びのボタン間のギャップを狭める */
     }
     .nav-button {
         font-size: 0.7em; /* ナビゲーションボタンのフォントサイズを調整 */
@@ -846,8 +846,8 @@ footer .footer-nav { /* HTMLのfooter navタグに直接適用するため変更
         font-size: 0.75em;
     }
     .modal-content {
-        padding: 12px; /* モーダルのパディングを調整 */
-        max-width: 90vw; /* モーダルの最大幅を調整 */
+        padding: 10px; /* ★修正：モーダルのパディングを調整 */
+        max-width: 90vw; /* ★修正：モーダルの最大幅を調整 */
         max-height: 80vh; /* モーダルの最大高さを調整 */
     }
 }
@@ -877,7 +877,7 @@ footer .footer-nav { /* HTMLのfooter navタグに直接適用するため変更
         padding: 1px 2px;
     }
     .header-nav {
-        gap: 2px; /* ★修正: 縦並びのボタン間のギャップをさらに狭める */
+        gap: 0px; /* ★修正: 縦並びのボタン間のギャップをさらに狭める (0px) */
     }
     .nav-button {
         font-size: 0.6em; /* ナビゲーションボタンを最も小さく */
@@ -909,8 +909,8 @@ footer .footer-nav { /* HTMLのfooter navタグに直接適用するため変更
         height: 250px; /* 縦長に見えるように調整 */
     }
     .modal-content {
-        padding: 5px; /* モーダルのパディングも小さく */
-        max-width: 95vw; /* ★修正: モーダルの最大幅を画面幅にさらに合わせる */
+        padding: 5px; /* ★修正: モーダルのパディングも小さく */
+        max-width: 98vw; /* ★修正: モーダルの最大幅を画面幅にさらに合わせる */
         max-height: 80vh; /* モーダルの最大高さを調整 */
     }
     #movie-detail-modal h2 {
