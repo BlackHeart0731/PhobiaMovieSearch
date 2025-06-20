@@ -41,7 +41,7 @@ body {
 header {
     background-color: #1a242f; /* 濃い青 */
     color: #ecf0f1;
-    padding: 25px 0; /* ★修正: 上下のパディングを15pxから25pxに増やしました */
+    padding: 25px 0; /* PC版での高さを維持 */
     box-shadow: 0 4px 10px rgba(0,0,0,0.3);
     border-bottom-left-radius: 15px; /* モダンレトロな角丸 */
     border-bottom-right-radius: 15px;
@@ -708,6 +708,9 @@ footer .footer-nav { /* HTMLのfooter navタグに直接適用するため変更
 
 /* レスポンシブ調整 */
 @media (max-width: 900px) {
+    header {
+        padding: 20px 0; /* ヘッダーの上下パディングを少し減らす */
+    }
     .header-container {
         flex-direction: column;
         text-align: center;
@@ -720,7 +723,7 @@ footer .footer-nav { /* HTMLのfooter navタグに直接適用するため変更
         justify-content: center;
         width: 100%;
     }
-    /* ★修正: モーダル内のトップコンテンツを横並び維持（折り返しは許可） */
+    /* モーダル内のトップコンテンツを横並び維持（折り返しは許可） */
     #movie-detail-modal #movie-detail-top-content {
         flex-direction: row; /* カラムではなく横並びを維持 */
         align-items: flex-start; /* 上揃えに戻す */
@@ -739,27 +742,28 @@ footer .footer-nav { /* HTMLのfooter navタグに直接適用するため変更
 }
 
 @media (max-width: 768px) {
+    header {
+        padding: 15px 0; /* ヘッダーの上下パディングをさらに減らす */
+    }
     .container {
         padding: 0 15px;
     }
-    /* ★追加: ヘッダーロゴとタイトル部分の調整 */
     .site-branding .logo {
         height: 40px; /* ロゴを小さく */
         margin-right: 10px;
     }
     .site-title-area .site-title {
-        font-size: 1.8em; /* サイトタイトルを小さく */
+        font-size: 1.6em; /* サイトタイトルをさらに小さく */
     }
     .site-title-area .site-description {
-        font-size: 0.8em; /* 説明文を小さく */
+        font-size: 0.75em; /* 説明文をさらに小さく */
     }
     .beta-tag {
         font-size: 0.4em;
         padding: 2px 6px;
     }
-    /* ナビゲーションボタンの調整 */
     .nav-button {
-        font-size: 0.9em;
+        font-size: 0.85em; /* ナビゲーションボタンのフォントサイズを調整 */
         padding: 8px 15px;
     }
 
@@ -800,18 +804,21 @@ footer .footer-nav { /* HTMLのfooter navタグに直接適用するため変更
 }
 
 @media (max-width: 480px) {
+    header {
+        padding: 10px 0; /* ヘッダーの上下パディングを最も小さく */
+    }
     .site-title-area .site-title {
-        font-size: 1.5em; /* さらに小さく */
+        font-size: 1.3em; /* サイトタイトルをさらに小さく */
     }
     .logo {
-        height: 35px; /* さらに小さく */
+        height: 30px; /* ロゴをさらに小さく */
         margin-right: 8px;
     }
     .site-description {
-        font-size: 0.7em; /* さらに小さく */
+        font-size: 0.65em; /* 説明文をさらに小さく */
     }
     .nav-button {
-        font-size: 0.75em;
+        font-size: 0.7em; /* ナビゲーションボタンをさらに小さく */
         padding: 5px 8px;
     }
     .tab-btn {
