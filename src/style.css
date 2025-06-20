@@ -758,9 +758,9 @@ footer .footer-nav { /* HTMLのfooter navタグに直接適用するため変更
     }
     .modal-content {
         padding: 25px;
-        /* ★追加: モーダルの最大幅と高さを調整 */
-        max-width: 95vw; 
-        max-height: 85vh; 
+        /* ★修正: モーダルの最大幅と高さを調整 */
+        max-width: 90vw; 
+        max-height: 80vh; 
     }
 }
 
@@ -772,7 +772,7 @@ footer .footer-nav { /* HTMLのfooter navタグに直接適用するため変更
         padding: 0 10px; /* 全体のコンテナのパディングをさらに減らす */
     }
     .site-branding {
-        margin-bottom: 6px; /* ロゴとボタンの間の余白を調整 */
+        margin-bottom: 4px; /* ★さらに修正: ロゴとボタンの間の余白を調整 */
     }
     .site-branding .logo {
         height: 30px; /* ロゴをさらに小さく */
@@ -789,8 +789,10 @@ footer .footer-nav { /* HTMLのfooter navタグに直接適用するため変更
         padding: 1px 3px;
     }
     .header-nav {
+        width: 100%; /* ★追加: 確実に幅を100%に */
         flex-direction: column; /* ★修正: ボタンを縦に並べる */
-        gap: 5px; /* ★追加: 縦並びのボタン間のギャップ */
+        align-items: center; /* ★追加: 縦並びのボタンを中央寄せ */
+        gap: 5px; /* 縦並びのボタン間のギャップ */
     }
     .nav-button {
         font-size: 0.7em; /* ナビゲーションボタンのフォントサイズを調整 */
@@ -843,9 +845,9 @@ footer .footer-nav { /* HTMLのfooter navタグに直接適用するため変更
         font-size: 0.75em;
     }
     .modal-content {
-        padding: 15px; /* ★修正：モーダルのパディングを調整 */
-        max-width: 95vw; /* ★修正：モーダルの最大幅を調整 */
-        max-height: 85vh; /* ★修正：モーダルの最大高さを調整 */
+        padding: 12px; /* ★さらに修正：モーダルのパディングを調整 */
+        max-width: 90vw; /* ★さらに修正：モーダルの最大幅を調整 */
+        max-height: 80vh; /* ★さらに修正：モーダルの最大高さを調整 */
     }
 }
 
@@ -854,7 +856,7 @@ footer .footer-nav { /* HTMLのfooter navタグに直接適用するため変更
         padding: 5px 0; /* ヘッダーの上下パディングを最も小さく */
     }
     .site-branding {
-        margin-bottom: 3px; /* ロゴとボタンの間の余白をさらに調整 */
+        margin-bottom: 2px; /* ★さらに修正: ロゴとボタンの間の余白をさらに調整 */
     }
     .site-branding .logo {
         height: 25px; /* ロゴを最も小さく */
@@ -899,9 +901,9 @@ footer .footer-nav { /* HTMLのfooter navタグに直接適用するため変更
         height: 250px; /* 縦長に見えるように調整 */
     }
     .modal-content {
-        padding: 8px; /* ★修正：モーダルのパディングも小さく */
-        max-width: 95vw; /* ★修正：モーダルの最大幅を調整 */
-        max-height: 85vh; /* ★修正：モーダルの最大高さを調整 */
+        padding: 5px; /* ★さらに修正：モーダルのパディングも小さく */
+        max-width: 90vw; /* ★さらに修正：モーダルの最大幅を調整 */
+        max-height: 80vh; /* ★さらに修正：モーダルの最大高さを調整 */
     }
     #movie-detail-modal h2 {
         font-size: 1.3em;
