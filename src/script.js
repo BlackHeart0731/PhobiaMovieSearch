@@ -1,10 +1,10 @@
 // =================================================================================
 // Initial Setup and DOM Element Acquisition
 // =================================================================================
-// ★★★ Please reconfirm your API key! ★★★
-// Please replace 'YOUR_TMDB_API_KEY' below with your own API key.
-// If this is not correct, no movie information will be displayed.
-const TMDB_API_KEY = '9c5b6fe18f36543b858effdaf87e44e0'; // Replace with your TMDB API key
+// ★★★ TMDB APIキーをここに設定してください！ ★★★
+// 'YOUR_TMDB_API_KEY' の部分をあなたの実際のAPIキーに置き換えてください。
+// これが正しくないと、映画情報が表示されません。
+const TMDB_API_KEY = '9c5b6fe18f36543b858effdaf87e44e0'; // 例: '9c5b6fe18f36543b858effdaf87e44e0'のような文字列です
 
 const TMDB_BASE_URL = 'https://api.themoviedb.org/3';
 const IMAGE_BASE_URL = 'https://image.tmdb.org/t/p/w500';
@@ -12,9 +12,11 @@ const IMAGE_BASE_URL = 'https://image.tmdb.org/t/p/w500';
 // Supabase Edge Function Endpoints (Change according to your environment)
 // ※These URLs need to be set correctly upon actual deployment.
 // デプロイしたSupabase Edge Functionの正確なURLに置き換えてください
-const SUBMIT_PHOBIA_URL = 'https://yzkmduhebhwkkywhvqkr.supabase.co/functions/v1/submit-phobia-report'; // 末尾の /submit は不要です
-const GET_PHOBIA_URL = 'YOUR_SUPABASE_EDGE_FUNCTION_URL/get-by-movie'; // Assumed to return dummy data
-const GET_FEATURE_URL = 'YOUR_SUPABASE_EDGE_FUNCTION_URL/features'; // Assumed to return dummy data
+const SUBMIT_PHOBIA_URL = 'https://yzkmduhebhwkkywhvqkr.supabase.co/functions/v1/submit-phobia-report'; // 投稿用Edge FunctionのURL
+// ★★★ GET_PHOBIA_URLをあなたのデプロイ済みEdge FunctionのURLに置き換えてください！ ★★★
+// あなたのプロジェクトのURLに合わせた正確なものに設定してください
+const GET_PHOBIA_URL = 'https://yzkmduhebhwkkywhvqkr.supabase.co/functions/v1/get-phobia-reports'; // 取得用Edge FunctionのURL
+const GET_FEATURE_URL = 'YOUR_SUPABASE_EDGE_FUNCTION_URL/features'; // 仮のURL、今後の機能用
 
 // DOM Elements
 const movieListEl = document.getElementById('movie-list');
@@ -176,7 +178,7 @@ function displayMovies() {
 
     if (moviesToShow.length === 0 && allLoadedMovies.length === 0) {
         // If no movies on first load
-        movieListEl.innerHTML = '<p style="text-align: center; color: #777;" lang="ja">映画が見つかりませんでした。</p>';
+        movieListEl.innerHTML = '<p style="text-align: center; color: #777;" lang="ja">該当する映画が見つかりませんでした。</p>';
     } else {
         moviesToShow.forEach(movie => {
             const movieCard = createMovieCard(movie);
@@ -250,7 +252,7 @@ async function openMovieDetailModal(movieId) {
     const director = credits && credits.crew ? (credits.crew.find(member => member.job === 'Director')?.name || '情報なし') : '情報なし';
     const genres = movie.genres && movie.genres.length > 0 ? movie.genres.map(g => g.name).join(', ') : '情報なし';
 
-    // Fetch phobia information from the backend (currently returns dummy data)
+    // Fetch phobia information from the backend
     const phobiaReports = await getPhobiaInfoFromBackend(movieId);
 
     // Dynamically generate content for the movie detail modal
@@ -305,22 +307,24 @@ async function openMovieDetailModal(movieId) {
  * Opens the info modal and displays the specified title and content.
  * @param {string} title - The title to display in the modal
  * @param {string} content - The HTML content to display in the modal
+ * @param {function} [onCloseCallback=null] - Optional: Callback function to execute when the modal is closed.
  */
-function openInfoModal(title, content) {
-    // First, call the common close function to close all modals and ensure a clean state
+function openInfoModal(title, content, onCloseCallback = null) { // onCloseCallback 引数を追加
     closeModal();
 
-    // Set content for the info modal
     document.getElementById('info-modal-title').innerText = title;
     document.getElementById('info-modal-body').innerHTML = content;
     
-    // Show modal
-    modalOverlay.classList.remove('hidden'); // Show overlay
-    infoModal.classList.remove('hidden'); // Show info modal
-    document.body.style.overflow = 'hidden'; // Disable background scrolling
+    modalOverlay.classList.remove('hidden');
+    infoModal.classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
 
-    // Re-set event listener for close button
-    infoModal.querySelector('.close-modal-btn').addEventListener('click', closeModal);
+    infoModal.querySelector('.close-modal-btn').onclick = () => {
+        closeModal();
+        if (onCloseCallback) {
+            onCloseCallback();
+        }
+    };
 }
 
 
@@ -333,22 +337,21 @@ function openInfoModal(title, content) {
  * @returns {Promise<Object>} Phobia report data
  */
 async function getPhobiaInfoFromBackend(movieId) {
-    // ユーザーからの要望により、現在は空のオブジェクトを返します。
-    // In reality, this would send movieId to GET_PHOBIA_URL to fetch information.
     console.log(`Fetching phobia info from backend for movie ID: ${movieId}`);
-    // This is where you would actually call the Supabase Edge Function (GET_PHOBIA_URL)
-    // try {
-    //     const response = await fetch(`${GET_PHOBIA_URL}?movieId=${movieId}`);
-    //     if (!response.ok) throw new Error('Failed to fetch phobia reports');
-    //     const data = await response.json();
-    //     return data.reports || {}; // Adjust according to Supabase response
-    // } catch (error) {
-    //     console.error('Error fetching phobia info:', error);
-    //     return {}; // Return empty object on error
-    // }
-
-    // サンプルデータを削除し、空のオブジェクトを返します
-    return {}; 
+    
+    try {
+        // ★★★ 修正点: GET_PHOBIA_URLへの実際のfetch呼び出しを有効にしました ★★★
+        const response = await fetch(`${GET_PHOBIA_URL}?movieId=${movieId}`); 
+        if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(`Failed to fetch phobia reports: ${errorData.error || '不明なエラー'}`);
+        }
+        const data = await response.json();
+        return data.reports || {}; 
+    } catch (error) { // 型アノテーションを削除
+        console.error('Error fetching phobia info:', error.message);
+        return {}; // エラー時は空のオブジェクトを返す
+    }
 }
 
 /**
@@ -433,12 +436,11 @@ async function handlePhobiaFormSubmit(event) {
     const formMessage = document.getElementById('form-message');
 
     // URL filtering for submission content (moderation feature)
-    const hasUrl = (text) => /(https?:\/\/[^\s]+)/g.test(text); // Add this line if hasUrl is not defined
+    const hasUrl = (text) => /(https?:\/\/[^\s]+)/g.test(text || ''); // null/undefinedチェックを追加
 
     if (hasUrl(otherText) || hasUrl(detailsText) || hasUrl(timeText)) {
         formMessage.style.color = 'red';
         formMessage.innerText = '投稿内容にURLが含まれています。URLの投稿はブロックされます。';
-        // Admin notification logic (currently only console output)
         console.warn('Moderation Alert: URL detected in submission for movie ID:', movieId);
         return; // Block submission
     }
@@ -450,7 +452,7 @@ async function handlePhobiaFormSubmit(event) {
     }
 
     const payload = {
-        movieId: movieId,
+        movieId: movieId, // Edge Functionでタイトルに変換するため、IDを送信
         phobias: selectedPhobias,
         otherPhobia: otherText,
         details: detailsText,
@@ -467,22 +469,26 @@ async function handlePhobiaFormSubmit(event) {
         
         if (!response.ok) {
             const errorData = await response.json();
-            // エラーの詳細メッセージをコンソールとフォームメッセージに表示
             throw new Error(`投稿失敗: ${errorData.error || '不明なエラー'}`); 
         }
 
-        formMessage.style.color = 'green';
-        formMessage.innerText = '恐怖要素が投稿されました！ご協力ありがとうございます。';
-        form.reset(); // Reset form
-        document.getElementById('phobia-other-text').value = ''; // Also reset "Other" text field
-        // Re-open modal after submission to display updated report list
-        await openMovieDetailModal(movieId); 
+        formMessage.innerText = ''; // フォームメッセージをクリア
+        form.reset(); // フォームをリセット
+        document.getElementById('phobia-other-text').value = ''; // 「その他」テキストフィールドもリセット
+
+        // 投稿成功ポップアップを表示
+        openInfoModal(
+            '報告完了',
+            '<p style="text-align: center; color: #333; font-size: 1.1em;">恐怖要素の報告、ありがとうございました！<br>この情報はサイトの改善に役立てられます。</p>',
+            () => { // ポップアップが閉じられた後に実行するコールバック
+                openMovieDetailModal(movieId); // 最新の情報で映画詳細モーダルを再表示
+            }
+        );
 
     } catch (error) {
         console.error('Phobia submission error:', error);
         formMessage.style.color = 'red';
         formMessage.innerText = `投稿に失敗しました。時間をおいて再度お試しください。(${error.message})`;
-        // Consider admin notification logic for errors
     }
 }
 

@@ -2,7 +2,8 @@
 /* 日本語フォント: しねきゃぷしょん */
 @font-face {
     font-family: 'cinecaption';
-    src: url('../fonts/cinecaption226.ttf') format('truetype');
+    /* ★★★ 修正点: フォントファイルのパスを 'assets/fonts/' ディレクトリに合うように変更しました ★★★ */
+    src: url('../assets/fonts/cinecaption226.ttf') format('truetype'); 
     font-weight: normal;
     font-style: normal;
 }
@@ -12,7 +13,7 @@
 
 /* 基本スタイル */
 body {
-    font-family: 'cinecaption', 'Playfair Display', sans-serif; /* 日本語フォントを優先し、英語フォント、汎用フォントをフォールバック */
+    font-family: 'Inter', sans-serif; /* Interをデフォルトにし、日本語は個別適用を推奨 */
     margin: 0;
     padding: 0;
     background-color: #f8f8f8; /* ボディは白に近いグレー */
@@ -20,18 +21,18 @@ body {
     line-height: 1.6;
 }
 
-/* 日本語テキストにcinecaptionを強制適用するクラス（必要に応じて、lang="ja"属性を使うことを推奨） */
-[lang="ja"] {
+/* 日本語テキストにcinecaptionを適用するクラス/属性セレクタ */
+[lang="ja"], .lang-ja { /* lang="ja"属性が優先されるように */
     font-family: 'cinecaption', sans-serif;
 }
 
-/* 英語テキストにPlayfair Displayを強制適用するクラス（必要に応じて、lang="en"属性を使うことを推奨） */
-[lang="en"] {
+/* 英語テキストにPlayfair Displayを適用するクラス/属性セレクタ */
+[lang="en"], .lang-en { /* lang="en"属性が優先されるように */
     font-family: 'Playfair Display', serif;
 }
 
-
-.container { /* index.htmlのmainタグにこのクラスがあるので、そのまま残します */
+/* 全体のコンテナスタイル */
+.container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
@@ -48,15 +49,9 @@ header {
     position: sticky;
     top: 0;
     z-index: 999;
-    /* ヘッダー内部のレイアウト調整 */
-    display: flex; /* 追加 */
-    justify-content: center; /* 追加 */
-    align-items: center; /* 追加 */
-    flex-wrap: wrap; /* 追加 */
 }
 
-/* header .container を .header-container に変更 (HTMLの変更と合わせる) */
-header .container { /* index.htmlのheader内のdivにcontainerクラスがあるため、こちらを適用 */
+header .header-container { /* HTMLのheader内のcontainerクラスに直接適用 */
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -64,8 +59,7 @@ header .container { /* index.htmlのheader内のdivにcontainerクラスがあ�
     width: 100%;
 }
 
-
-.site-branding { /* a#home-link にこのスタイルを適用するため、セレクタ名を変更 */
+.site-branding { /* a#home-link にこのスタイルを適用するためセレクタ名を変更 */
     display: flex;
     align-items: center;
     text-decoration: none;
@@ -91,8 +85,8 @@ header .container { /* index.htmlのheader内のdivにcontainerクラスがあ�
     flex-direction: column;
 }
 
-.site-title-area h1 {
-    font-family: 'cinecaption', sans-serif;
+.site-title { /* H1タグのクラス */
+    font-family: 'cinecaption', sans-serif; /* 日本語フォント */
     margin: 0;
     font-size: 2.2em; /* サイト名 */
     font-weight: 700;
@@ -112,14 +106,13 @@ header .container { /* index.htmlのheader内のdivにcontainerクラスがあ�
 }
 
 .site-description {
-    font-family: 'cinecaption', sans-serif;
+    font-family: 'cinecaption', sans-serif; /* 日本語フォント */
     margin: 0;
     font-size: 0.9em;
     color: #bdc3c7;
 }
 
-/* header nav を .header-nav に変更 (HTMLの変更と合わせる) */
-header nav { /* HTMLのheader navタグに直接適用するため変更 */
+header .header-nav { /* HTMLのheader navタグに直接適用するため変更 */
     display: flex;
     gap: 15px;
     flex-wrap: wrap;
@@ -127,7 +120,6 @@ header nav { /* HTMLのheader navタグに直接適用するため変更 */
 }
 
 /* 各種ボタンの基本スタイル（共通化） */
-/* nav-button, action-button, tab-btn, feature-btn, footer-link-button を .btn に統合し、個別の調整はクラスで */
 .btn { /* 新しい共通ボタンクラス */
     background-color: #34495e; /* 明るすぎない青系 */
     color: #ecf0f1;
@@ -170,9 +162,21 @@ header nav { /* HTMLのheader navタグに直接適用するため変更 */
     left: 125%; /* ホバーで移動 */
 }
 
-/* 個別のボタンクラスに共通スタイルを適用 */
-.nav-button, .action-button, .tab-btn, .feature-btn, .footer-btn { /* HTMLとクラス名を合わせる */
-    /* .btn に統合されたため、これらは追加のスタイルのみ記述 */
+/* 個別のボタンクラスに共通スタイルを適用 (HTMLのクラス名と合わせる) */
+/* 「フォビアディレクター」「レジェンドフォビアムービー」ボタンの工夫 */
+.nav-button {
+    background-image: linear-gradient(135deg, #4a6781 0%, #34495e 100%); /* Subtle gradient */
+    border: 1px solid rgba(255,255,255,0.2); /* Light border */
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.1); /* More pronounced shadow, subtle inner highlight */
+}
+.nav-button:hover {
+    background-image: linear-gradient(135deg, #34495e 0%, #4a6781 100%); /* Reverse gradient on hover */
+    transform: translateY(-4px); /* Slightly more pronounced hover */
+    box-shadow: 0 8px 15px rgba(0,0,0,0.4);
+}
+
+.action-button, .tab-btn, .feature-btn { 
+    /* これらのクラスは.btnのスタイルを継承しつつ、個別の調整があればここに記述 */
 }
 
 
@@ -255,12 +259,12 @@ header nav { /* HTMLのheader navタグに直接適用するため変更 */
 }
 
 /* 映画リスト */
-#movie-list-section {
+#movie-list-section { /* sectionタグとしてHTMLに追加しました */
     padding: 20px 0;
     text-align: center;
 }
 
-.movie-grid { /* index.htmlの#movie-listにこのクラスがあるため変更 */
+#movie-list.movie-grid { /* #movie-listに.movie-gridクラスが適用されるように修正 */
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); /* カードサイズ調整 */
     gap: 30px;
@@ -325,16 +329,18 @@ header nav { /* HTMLのheader navタグに直接適用するため変更 */
     margin: 0 15px 15px;
 }
 
+/* 「もっと見る」ボタンの丸みを追加 */
 .load-more-button {
-    /* .btn に統合されたため、残りは差分のみ */
     background-color: #2ecc71; /* 緑系 */
     color: white;
-    padding: 15px 35px;
+    padding: 15px 40px; /* 少しパディングも増やす */
     font-size: 1.1em;
     margin-top: 40px;
     display: block; /* 中央揃えのため */
     margin-left: auto;
     margin-right: auto;
+    border-radius: 50px; /* 丸みを強く */
+    /* .btn に統合されたスタイルは既に適用済み */
 }
 
 .load-more-button:hover {
@@ -360,14 +366,13 @@ footer {
     border-top-right-radius: 15px;
 }
 
-.footer-content { /* index.htmlのfooterにこのクラスはないので削除またはHTMLを修正 */
+footer .footer-content { /* HTMLのfooterタグ内のcontainerクラスに適用 */
     display: flex;
     flex-direction: column; /* 縦並び */
     align-items: center;
     gap: 20px;
 }
 
-/* footer nav を .footer-nav に変更 (HTMLの変更と合わせる) */
 footer .footer-nav { /* HTMLのfooter navタグに直接適用するため変更 */
     display: flex;
     flex-wrap: wrap;
@@ -376,16 +381,19 @@ footer .footer-nav { /* HTMLのfooter navタグに直接適用するため変更
     margin-bottom: 20px;
 }
 
-.footer-btn { /* HTMLとクラス名を合わせる */
-    /* .btn に統合されたため、残りは差分のみ */
+/* フッターのリンク集にボタンの要素を付与 */
+.footer-btn { /* HTMLのaタグにこのクラスを直接適用 */
     background-color: #777; /* フッターに合わせた暗めのボタン色 */
+    background-image: linear-gradient(135deg, #777 0%, #5e5e5e 100%); /* Subtle gradient */
     color: #f8f8f8;
-    padding: 10px 18px;
-    font-size: 0.9em;
+    padding: 12px 20px; /* パディングを少し調整 */
+    font-size: 0.95em; /* フォントサイズも調整 */
+    border: 1px solid rgba(255,255,255,0.1);
 }
 
 .footer-btn:hover {
     background-color: #666;
+    background-image: linear-gradient(135deg, #5e5e5e 0%, #777 100%);
     transform: translateY(-2px);
 }
 
@@ -422,13 +430,14 @@ footer .footer-nav { /* HTMLのfooter navタグに直接適用するため変更
     padding: 20px;
     overflow-y: auto;
     backdrop-filter: blur(5px); /* モーダルの背景をぼかす */
+    /* 初期状態はhiddenクラスで非表示 */
 }
 
 /* hidden クラスが適用された要素を確実に非表示にする */
-#modal-overlay.hidden,
-.modal-content.hidden { 
+#modal-overlay.hidden, .modal-content.hidden { /* オーバーレイとコンテンツ両方に適用 */
     display: none !important; 
 }
+
 
 .modal-content {
     background-color: #fff;
@@ -441,6 +450,7 @@ footer .footer-nav { /* HTMLのfooter navタグに直接適用するため変更
     overflow-y: auto;
     max-height: 90vh;
     animation: fadeInScale 0.3s ease-out forwards; /* フェードインとスケールアップ */
+    /* デフォルトでは表示、JSでhiddenクラスを操作 */
 }
 
 @keyframes fadeInScale {
@@ -474,10 +484,10 @@ footer .footer-nav { /* HTMLのfooter navタグに直接適用するため変更
 
 /* 映画詳細モーダル */
 #movie-detail-modal #movie-detail-top-content {
-    display: flex;
+    display: flex; /* 横並びにする */
     gap: 40px; /* ギャップを広げる */
     margin-bottom: 30px;
-    flex-wrap: wrap;
+    flex-wrap: wrap; /* コンテンツが収まらない場合は折り返す */
     align-items: flex-start; /* 上揃え */
 }
 
@@ -495,8 +505,9 @@ footer .footer-nav { /* HTMLのfooter navタグに直接適用するため変更
 }
 
 #movie-detail-modal #movie-detail-info {
-    flex-grow: 1;
-    min-width: 280px; /* 情報部分の最小幅 */
+    flex-grow: 1; /* 残りのスペースを埋める */
+    /* min-width: 280px;  削除します。flex-basisで制御します */
+    flex-basis: calc(100% - 320px); /* ポスター幅(280px) + gap(40px) を引いた残りの幅 */
 }
 
 #movie-detail-modal h2 {
@@ -710,10 +721,11 @@ footer .footer-nav { /* HTMLのfooter navタグに直接適用するため変更
         justify-content: center;
         width: 100%;
     }
+    /* ★修正: モーダル内のトップコンテンツを横並び維持（折り返しは許可） */
     #movie-detail-modal #movie-detail-top-content {
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
+        flex-direction: row; /* カラムではなく横並びを維持 */
+        align-items: flex-start; /* 上揃えに戻す */
+        text-align: left; /* テキスト揃えも戻す */
         gap: 20px;
     }
     #movie-detail-modal #movie-detail-poster img {
@@ -738,7 +750,7 @@ footer .footer-nav { /* HTMLのfooter navタグに直接適用するため変更
         font-size: 0.4em;
         padding: 2px 6px;
     }
-    .nav-button, .action-button, .tab-btn, .feature-btn, .footer-link-button {
+    .nav-button, .action-button, .tab-btn, .feature-btn, .footer-link-button { /* footer-link-button は footer-btn に変更されたため注意 */
         font-size: 0.9em;
         padding: 8px 15px;
     }
@@ -772,7 +784,7 @@ footer .footer-nav { /* HTMLのfooter navタグに直接適用するため変更
     .footer-nav {
         gap: 10px;
     }
-    .footer-link-button {
+    .footer-btn { /* footer-link-button を footer-btn に変更 */
         padding: 8px 12px;
         font-size: 0.8em;
     }
@@ -820,5 +832,12 @@ footer .footer-nav { /* HTMLのfooter navタグに直接適用するため変更
     }
     .modal-content {
         padding: 15px;
+    }
+
+    /* ★追加: モーダルのポスターと情報をカラム表示に戻す (一番小さい画面サイズのみ) */
+    #movie-detail-modal #movie-detail-top-content {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
     }
 }

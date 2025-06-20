@@ -15,6 +15,10 @@
     <!-- Google AdSense スクリプト (HTMLのheadに追加) -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1387560637754446"
       crossorigin="anonymous"></script>
+    
+    <!-- ここに以前追加したデバッグ用の <style> ブロックがありましたが、削除しました。 -->
+    <!-- これにより、JavaScriptとCSSの hidden クラスが連携してモーダルを正しく表示/非表示できるようになります。 -->
+
 </head>
 <body>
 
@@ -74,7 +78,7 @@
         <div class="container footer-content"> <!-- footer-content クラスを追加 -->
             <div class="footer-links footer-nav"> <!-- footer-nav クラスも追加 -->
                 <!-- footer-btn クラスを追加 -->
-                <a href="#" class="footer-btn btn" lang="ja">ホーム</a> <!-- id="home-link" を削除して重複を解消 -->
+                <a href="#" class="footer-btn btn" id="home-link-footer" lang="ja">ホーム</a> <!-- id="home-link" を footer に移動し、衝突回避 -->
                 <a href="#" id="about-link" class="footer-btn btn" data-info-type="about" lang="ja">サイト説明</a>
                 <a href="#" id="disclaimer-link" class="footer-btn btn" data-info-type="disclaimer" lang="ja">免責事項</a>
                 <a href="#" id="privacy-link" class="footer-btn btn" data-info-type="privacy" lang="ja">プライバシーポリシー</a>
