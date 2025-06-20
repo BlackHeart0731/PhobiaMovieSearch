@@ -668,7 +668,7 @@ footer .footer-nav { /* HTMLのfooter navタグに直接適用するため変更
     padding: 12px;
     margin-bottom: 18px;
     border: 2px solid #ccc; /* 太めの枠線 */
-    border-radius: 8px;
+    border-radius: 10px; /* ★修正：inputの角丸を10pxに統一 */
     font-size: 1em;
     box-shadow: inset 0 1px 4px rgba(0,0,0,0.08);
     font-family: 'Playfair Display', serif; /* 英語フォント */
@@ -758,36 +758,43 @@ footer .footer-nav { /* HTMLのfooter navタグに直接適用するため変更
     }
     .modal-content {
         padding: 25px;
+        /* ★追加: モーダルの最大幅と高さを調整 */
+        max-width: 95vw; 
+        max-height: 85vh; 
     }
 }
 
 @media (max-width: 768px) {
     header {
-        padding: 8px 0; /* ★さらに調整: ヘッダーの上下パディングを減らす */
+        padding: 8px 0; /* ヘッダーの上下パディングを減らす */
     }
     .container {
         padding: 0 10px; /* 全体のコンテナのパディングをさらに減らす */
     }
     .site-branding {
-        margin-bottom: 6px; /* ★さらに調整: ロゴとボタンの間の余白を調整 */
+        margin-bottom: 6px; /* ロゴとボタンの間の余白を調整 */
     }
     .site-branding .logo {
-        height: 30px; /* ★さらに調整: ロゴをさらに小さく */
+        height: 30px; /* ロゴをさらに小さく */
         margin-right: 6px;
     }
     .site-title-area .site-title {
-        font-size: 1.2em; /* ★さらに調整: サイトタイトルをさらに小さく */
+        font-size: 1.2em; /* サイトタイトルをさらに小さく */
     }
     .site-title-area .site-description {
-        font-size: 0.6em; /* ★さらに調整: 説明文をさらに小さく */
+        font-size: 0.6em; /* 説明文をさらに小さく */
     }
     .beta-tag {
-        font-size: 0.28em; /* ★さらに調整: β版タグをさらに小さく */
+        font-size: 0.28em; /* β版タグをさらに小さく */
         padding: 1px 3px;
     }
+    .header-nav {
+        flex-direction: column; /* ★修正: ボタンを縦に並べる */
+        gap: 5px; /* ★追加: 縦並びのボタン間のギャップ */
+    }
     .nav-button {
-        font-size: 0.7em; /* ★さらに調整: ナビゲーションボタンのフォントサイズを調整 */
-        padding: 4px 9px; /* ★さらに調整: ナビゲーションボタンのパディングを調整 */
+        font-size: 0.7em; /* ナビゲーションボタンのフォントサイズを調整 */
+        padding: 4px 9px; /* ナビゲーションボタンのパディングを調整 */
     }
 
     .search-bar {
@@ -835,32 +842,37 @@ footer .footer-nav { /* HTMLのfooter navタグに直接適用するため変更
         padding: 7px 10px;
         font-size: 0.75em;
     }
+    .modal-content {
+        padding: 15px; /* ★修正：モーダルのパディングを調整 */
+        max-width: 95vw; /* ★修正：モーダルの最大幅を調整 */
+        max-height: 85vh; /* ★修正：モーダルの最大高さを調整 */
+    }
 }
 
 @media (max-width: 480px) {
     header {
-        padding: 5px 0; /* ★さらに調整: ヘッダーの上下パディングを最も小さく */
+        padding: 5px 0; /* ヘッダーの上下パディングを最も小さく */
     }
     .site-branding {
-        margin-bottom: 3px; /* ★さらに調整: ロゴとボタンの間の余白をさらに調整 */
+        margin-bottom: 3px; /* ロゴとボタンの間の余白をさらに調整 */
     }
     .site-branding .logo {
-        height: 25px; /* ★さらに調整: ロゴを最も小さく */
+        height: 25px; /* ロゴを最も小さく */
         margin-right: 4px;
     }
     .site-title-area .site-title {
-        font-size: 1em; /* ★さらに調整: サイトタイトルを最も小さく */
+        font-size: 1em; /* サイトタイトルを最も小さく */
     }
     .site-title-area .site-description {
-        font-size: 0.55em; /* ★さらに調整: 説明文を最も小さく */
+        font-size: 0.55em; /* 説明文を最も小さく */
     }
     .beta-tag {
-        font-size: 0.2em; /* ★さらに調整: β版タグを最も小さく */
+        font-size: 0.2em; /* β版タグを最も小さく */
         padding: 1px 2px;
     }
     .nav-button {
-        font-size: 0.6em; /* ★さらに調整: ナビゲーションボタンを最も小さく */
-        padding: 3px 6px; /* ★さらに調整: ナビゲーションボタンのパディングを調整 */
+        font-size: 0.6em; /* ナビゲーションボタンを最も小さく */
+        padding: 3px 6px; /* ナビゲーションボタンのパディングを調整 */
     }
     .tab-btn {
         font-size: 0.65em;
@@ -868,7 +880,7 @@ footer .footer-nav { /* HTMLのfooter navタグに直接適用するため変更
     }
     .search-bar {
         width: 98%; /* 小さい画面でも横幅を維持 */
-        max-width: 280px; /* ★さらに狭く */
+        max-width: 280px; /* さらに狭く */
         gap: 5px; /* 検索バー要素間のギャップをさらに調整 */
     }
     #search-input {
@@ -887,7 +899,9 @@ footer .footer-nav { /* HTMLのfooter navタグに直接適用するため変更
         height: 250px; /* 縦長に見えるように調整 */
     }
     .modal-content {
-        padding: 8px; /* モーダルのパディングも小さく */
+        padding: 8px; /* ★修正：モーダルのパディングも小さく */
+        max-width: 95vw; /* ★修正：モーダルの最大幅を調整 */
+        max-height: 85vh; /* ★修正：モーダルの最大高さを調整 */
     }
     #movie-detail-modal h2 {
         font-size: 1.3em;
