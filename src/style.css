@@ -45,9 +45,10 @@ header {
     box-shadow: 0 4px 10px rgba(0,0,0,0.3);
     border-bottom-left-radius: 15px; /* モダンレトロな角丸 */
     border-bottom-right-radius: 15px;
-    position: sticky;
-    top: 0;
-    z-index: 999;
+    /* ★修正: ヘッダーの固定を解除 */
+    /* position: sticky; */
+    /* top: 0; */
+    /* z-index: 999; */
 }
 
 header .header-container { /* HTMLのheader内のcontainerクラスに直接適用 */
@@ -712,16 +713,16 @@ footer .footer-nav { /* HTMLのfooter navタグに直接適用するため変更
         padding: 20px 0; /* ヘッダーの上下パディングを少し減らす */
     }
     .header-container {
-        flex-direction: column;
+        flex-direction: column; /* ★修正: スマートフォンで縦並びにする */
         text-align: center;
     }
     .site-branding {
         margin-right: 0;
-        margin-bottom: 15px;
+        margin-bottom: 15px; /* ★追加: ロゴとボタンの間に余白 */
     }
     .header-nav {
-        justify-content: center;
-        width: 100%;
+        justify-content: center; /* ★修正: ボタンを中央揃えにする */
+        width: 100%; /* ★追加: 幅を100%にする */
     }
     /* モーダル内のトップコンテンツを横並び維持（折り返しは許可） */
     #movie-detail-modal #movie-detail-top-content {
@@ -749,22 +750,22 @@ footer .footer-nav { /* HTMLのfooter navタグに直接適用するため変更
         padding: 0 15px;
     }
     .site-branding .logo {
-        height: 40px; /* ロゴを小さく */
+        height: 35px; /* ★修正: ロゴをさらに小さく */
         margin-right: 10px;
     }
     .site-title-area .site-title {
-        font-size: 1.6em; /* サイトタイトルをさらに小さく */
+        font-size: 1.5em; /* ★修正: サイトタイトルをさらに小さく */
     }
     .site-title-area .site-description {
-        font-size: 0.75em; /* 説明文をさらに小さく */
+        font-size: 0.7em; /* ★修正: 説明文をさらに小さく */
     }
     .beta-tag {
-        font-size: 0.4em;
-        padding: 2px 6px;
+        font-size: 0.35em; /* ★修正: β版タグをさらに小さく */
+        padding: 2px 5px;
     }
     .nav-button {
-        font-size: 0.85em; /* ナビゲーションボタンのフォントサイズを調整 */
-        padding: 8px 15px;
+        font-size: 0.8em; /* ★修正: ナビゲーションボタンのフォントサイズを調整 */
+        padding: 6px 12px; /* ★修正: ナビゲーションボタンのパディングを調整 */
     }
 
     .search-bar {
@@ -797,7 +798,7 @@ footer .footer-nav { /* HTMLのfooter navタグに直接適用するため変更
     .footer-nav {
         gap: 10px;
     }
-    .footer-btn {
+    .footer-btn { 
         padding: 8px 12px;
         font-size: 0.8em;
     }
@@ -808,22 +809,22 @@ footer .footer-nav { /* HTMLのfooter navタグに直接適用するため変更
         padding: 10px 0; /* ヘッダーの上下パディングを最も小さく */
     }
     .site-title-area .site-title {
-        font-size: 1.3em; /* サイトタイトルをさらに小さく */
+        font-size: 1.2em; /* ★修正: サイトタイトルをさらに小さく */
     }
     .logo {
-        height: 30px; /* ロゴをさらに小さく */
-        margin-right: 8px;
+        height: 28px; /* ★修正: ロゴをさらに小さく */
+        margin-right: 6px;
     }
     .site-description {
-        font-size: 0.65em; /* 説明文をさらに小さく */
+        font-size: 0.6em; /* ★修正: 説明文をさらに小さく */
     }
     .nav-button {
-        font-size: 0.7em; /* ナビゲーションボタンをさらに小さく */
-        padding: 5px 8px;
+        font-size: 0.65em; /* ★修正: ナビゲーションボタンをさらに小さく */
+        padding: 4px 7px;
     }
     .tab-btn {
-        font-size: 0.8em;
-        padding: 6px 10px;
+        font-size: 0.75em;
+        padding: 5px 8px;
     }
     .movie-grid {
         grid-template-columns: 1fr; /* 1列表示 */
