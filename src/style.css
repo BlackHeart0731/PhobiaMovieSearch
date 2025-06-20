@@ -2,8 +2,7 @@
 /* 日本語フォント: しねきゃぷしょん */
 @font-face {
     font-family: 'cinecaption';
-    /* ★★★ 修正点: フォントファイルのパスを 'assets/fonts/' ディレクトリに合うように変更しました ★★★ */
-    src: url('../assets/fonts/cinecaption226.ttf') format('truetype'); 
+    src: url('../assets/fonts/cinecaption226.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 }
@@ -42,7 +41,7 @@ body {
 header {
     background-color: #1a242f; /* 濃い青 */
     color: #ecf0f1;
-    padding: 15px 0;
+    padding: 25px 0; /* ★修正: 上下のパディングを15pxから25pxに増やしました */
     box-shadow: 0 4px 10px rgba(0,0,0,0.3);
     border-bottom-left-radius: 15px; /* モダンレトロな角丸 */
     border-bottom-right-radius: 15px;
@@ -743,17 +742,27 @@ footer .footer-nav { /* HTMLのfooter navタグに直接適用するため変更
     .container {
         padding: 0 15px;
     }
-    .site-title-area h1 {
-        font-size: 1.8em;
+    /* ★追加: ヘッダーロゴとタイトル部分の調整 */
+    .site-branding .logo {
+        height: 40px; /* ロゴを小さく */
+        margin-right: 10px;
+    }
+    .site-title-area .site-title {
+        font-size: 1.8em; /* サイトタイトルを小さく */
+    }
+    .site-title-area .site-description {
+        font-size: 0.8em; /* 説明文を小さく */
     }
     .beta-tag {
         font-size: 0.4em;
         padding: 2px 6px;
     }
-    .nav-button, .action-button, .tab-btn, .feature-btn, .footer-link-button { /* footer-link-button は footer-btn に変更されたため注意 */
+    /* ナビゲーションボタンの調整 */
+    .nav-button {
         font-size: 0.9em;
         padding: 8px 15px;
     }
+
     .search-bar {
         flex-direction: column;
         gap: 10px;
@@ -784,26 +793,26 @@ footer .footer-nav { /* HTMLのfooter navタグに直接適用するため変更
     .footer-nav {
         gap: 10px;
     }
-    .footer-btn { /* footer-link-button を footer-btn に変更 */
+    .footer-btn {
         padding: 8px 12px;
         font-size: 0.8em;
     }
 }
 
 @media (max-width: 480px) {
-    .site-title-area h1 {
-        font-size: 1.5em;
+    .site-title-area .site-title {
+        font-size: 1.5em; /* さらに小さく */
     }
     .logo {
-        height: 40px;
-        margin-right: 10px;
+        height: 35px; /* さらに小さく */
+        margin-right: 8px;
     }
     .site-description {
-        font-size: 0.8em;
+        font-size: 0.7em; /* さらに小さく */
     }
     .nav-button {
-        font-size: 0.8em;
-        padding: 6px 10px;
+        font-size: 0.75em;
+        padding: 5px 8px;
     }
     .tab-btn {
         font-size: 0.8em;
@@ -834,7 +843,7 @@ footer .footer-nav { /* HTMLのfooter navタグに直接適用するため変更
         padding: 15px;
     }
 
-    /* ★追加: モーダルのポスターと情報をカラム表示に戻す (一番小さい画面サイズのみ) */
+    /* モーダルのポスターと情報をカラム表示に戻す (一番小さい画面サイズのみ) */
     #movie-detail-modal #movie-detail-top-content {
         flex-direction: column;
         align-items: center;
