@@ -46,10 +46,6 @@ header {
     box-shadow: 0 4px 10px rgba(0,0,0,0.3);
     border-bottom-left-radius: 15px; /* モダンレトロな角丸 */
     border-bottom-right-radius: 15px;
-    /* ★修正: ヘッダーの固定を完全に解除 */
-    /* position: sticky; を削除 */
-    /* top: 0; を削除 */
-    /* z-index: 999; を削除 */
 }
 
 header .header-container { /* HTMLのheader内のcontainerクラスに直接適用 */
@@ -739,6 +735,7 @@ footer .footer-nav { /* HTMLのfooter navタグに直接適用するため変更
         justify-content: center;
         width: 100%;
         gap: 10px; /* ナビボタン間のギャップを調整 */
+        margin-bottom: 15px; /* ★追加: ヘッダーのナビゲーションボタンの下に余白を追加 */
     }
     .nav-button {
         font-size: 0.95em; /* ナビゲーションボタンのフォントサイズを調整 */
@@ -793,7 +790,8 @@ footer .footer-nav { /* HTMLのfooter navタグに直接適用するため変更
         width: 100%; /* 確実に幅を100%に */
         flex-direction: column; /* ボタンを縦に並べる */
         align-items: center; /* 縦並びのボタンを中央寄せ */
-        gap: 2px; /* ★修正: 縦並びのボタン間のギャップを狭める */
+        gap: 1px; /* ★修正: 縦並びのボタン間のギャップをさらに狭める */
+        margin-bottom: 10px; /* ★追加: ヘッダーのナビゲーションボタンの下に余白を追加 */
     }
     .nav-button {
         font-size: 0.7em; /* ナビゲーションボタンのフォントサイズを調整 */
@@ -801,7 +799,7 @@ footer .footer-nav { /* HTMLのfooter navタグに直接適用するため変更
     }
 
     .search-bar {
-        width: 98%; /* 画面幅に対して少し余白を持たせる */
+        width: calc(100% - 20px); /* 画面幅に対して少し余白を持たせる */
         max-width: 380px; /* スマートフォンでの最大の幅を制限 */
         margin-left: auto; /* 中央揃え */
         margin-right: auto; /* 中央揃え */
@@ -847,7 +845,7 @@ footer .footer-nav { /* HTMLのfooter navタグに直接適用するため変更
     }
     .modal-content {
         padding: 10px; /* ★修正：モーダルのパディングを調整 */
-        max-width: 90vw; /* ★修正：モーダルの最大幅を調整 */
+        max-width: 95vw; /* ★修正：モーダルの最大幅を調整 */
         max-height: 80vh; /* モーダルの最大高さを調整 */
     }
 }
@@ -878,6 +876,7 @@ footer .footer-nav { /* HTMLのfooter navタグに直接適用するため変更
     }
     .header-nav {
         gap: 0px; /* ★修正: 縦並びのボタン間のギャップをさらに狭める (0px) */
+        margin-bottom: 8px; /* ★追加: ヘッダーのナビゲーションボタンの下に余白を追加 */
     }
     .nav-button {
         font-size: 0.6em; /* ナビゲーションボタンを最も小さく */
@@ -888,7 +887,7 @@ footer .footer-nav { /* HTMLのfooter navタグに直接適用するため変更
         padding: 4px 7px;
     }
     .search-bar {
-        width: 98%; /* 小さい画面でも横幅を維持 */
+        width: calc(100% - 10px); /* 小さい画面でも横幅を維持 */
         max-width: 280px; /* さらに狭く */
         gap: 5px; /* 検索バー要素間のギャップをさらに調整 */
     }
@@ -911,7 +910,7 @@ footer .footer-nav { /* HTMLのfooter navタグに直接適用するため変更
     .modal-content {
         padding: 5px; /* ★修正: モーダルのパディングも小さく */
         max-width: 98vw; /* ★修正: モーダルの最大幅を画面幅にさらに合わせる */
-        max-height: 80vh; /* モーダルの最大高さを調整 */
+        max-height: 90vh; /* モーダルの最大高さを調整 */
     }
     #movie-detail-modal h2 {
         font-size: 1.3em;
