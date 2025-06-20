@@ -18,6 +18,7 @@ body {
     background-color: #f8f8f8; /* ボディは白に近いグレー */
     color: #333;
     line-height: 1.6;
+    overflow-x: hidden; /* ★追加: 横方向のスクロールを無効にする */
 }
 
 /* 日本語テキストにcinecaptionを適用するクラス/属性セレクタ */
@@ -772,7 +773,7 @@ footer .footer-nav { /* HTMLのfooter navタグに直接適用するため変更
         padding: 0 10px; /* 全体のコンテナのパディングをさらに減らす */
     }
     .site-branding {
-        margin-bottom: 4px; /* ★さらに修正: ロゴとボタンの間の余白を調整 */
+        margin-bottom: 4px; /* ロゴとボタンの間の余白を調整 */
     }
     .site-branding .logo {
         height: 30px; /* ロゴをさらに小さく */
@@ -789,10 +790,10 @@ footer .footer-nav { /* HTMLのfooter navタグに直接適用するため変更
         padding: 1px 3px;
     }
     .header-nav {
-        width: 100%; /* ★追加: 確実に幅を100%に */
-        flex-direction: column; /* ★修正: ボタンを縦に並べる */
-        align-items: center; /* ★追加: 縦並びのボタンを中央寄せ */
-        gap: 5px; /* 縦並びのボタン間のギャップ */
+        width: 100%; /* 確実に幅を100%に */
+        flex-direction: column; /* ボタンを縦に並べる */
+        align-items: center; /* 縦並びのボタンを中央寄せ */
+        gap: 3px; /* ★修正: 縦並びのボタン間のギャップを狭める */
     }
     .nav-button {
         font-size: 0.7em; /* ナビゲーションボタンのフォントサイズを調整 */
@@ -845,9 +846,9 @@ footer .footer-nav { /* HTMLのfooter navタグに直接適用するため変更
         font-size: 0.75em;
     }
     .modal-content {
-        padding: 12px; /* ★さらに修正：モーダルのパディングを調整 */
-        max-width: 90vw; /* ★さらに修正：モーダルの最大幅を調整 */
-        max-height: 80vh; /* ★さらに修正：モーダルの最大高さを調整 */
+        padding: 12px; /* モーダルのパディングを調整 */
+        max-width: 90vw; /* モーダルの最大幅を調整 */
+        max-height: 80vh; /* モーダルの最大高さを調整 */
     }
 }
 
@@ -855,8 +856,11 @@ footer .footer-nav { /* HTMLのfooter navタグに直接適用するため変更
     header {
         padding: 5px 0; /* ヘッダーの上下パディングを最も小さく */
     }
+    .container {
+        padding: 0 5px; /* ★修正: 全体のコンテナのパディングをさらに狭める */
+    }
     .site-branding {
-        margin-bottom: 2px; /* ★さらに修正: ロゴとボタンの間の余白をさらに調整 */
+        margin-bottom: 2px; /* ロゴとボタンの間の余白をさらに調整 */
     }
     .site-branding .logo {
         height: 25px; /* ロゴを最も小さく */
@@ -871,6 +875,9 @@ footer .footer-nav { /* HTMLのfooter navタグに直接適用するため変更
     .beta-tag {
         font-size: 0.2em; /* β版タグを最も小さく */
         padding: 1px 2px;
+    }
+    .header-nav {
+        gap: 2px; /* ★修正: 縦並びのボタン間のギャップをさらに狭める */
     }
     .nav-button {
         font-size: 0.6em; /* ナビゲーションボタンを最も小さく */
@@ -888,6 +895,7 @@ footer .footer-nav { /* HTMLのfooter navタグに直接適用するため変更
     #search-input {
         font-size: 0.75em;
         padding: 7px 10px;
+        min-width: unset; /* ★追加: 最小幅を解除してより柔軟に縮小できるようにする */
     }
     #search-button {
         font-size: 0.75em;
@@ -901,9 +909,9 @@ footer .footer-nav { /* HTMLのfooter navタグに直接適用するため変更
         height: 250px; /* 縦長に見えるように調整 */
     }
     .modal-content {
-        padding: 5px; /* ★さらに修正：モーダルのパディングも小さく */
-        max-width: 90vw; /* ★さらに修正：モーダルの最大幅を調整 */
-        max-height: 80vh; /* ★さらに修正：モーダルの最大高さを調整 */
+        padding: 5px; /* モーダルのパディングも小さく */
+        max-width: 95vw; /* ★修正: モーダルの最大幅を画面幅にさらに合わせる */
+        max-height: 80vh; /* モーダルの最大高さを調整 */
     }
     #movie-detail-modal h2 {
         font-size: 1.3em;
