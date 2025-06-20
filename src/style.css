@@ -710,7 +710,7 @@ footer .footer-nav { /* HTMLのfooter navタグに直接適用するため変更
 /* レスポンシブ調整 */
 @media (max-width: 900px) {
     header {
-        padding: 15px 0; /* ★修正: ヘッダーの上下パディングを調整 */
+        padding: 15px 0; /* ヘッダーの上下パディングを調整 */
     }
     .header-container {
         flex-direction: column;
@@ -718,20 +718,20 @@ footer .footer-nav { /* HTMLのfooter navタグに直接適用するため変更
     }
     .site-branding {
         margin-right: 0;
-        margin-bottom: 10px; /* ★修正: ロゴとボタンの間の余白を調整 */
+        margin-bottom: 10px; /* ロゴとボタンの間の余白を調整 */
     }
     .site-branding .logo {
-        height: 45px; /* ★修正: ロゴサイズを調整 */
+        height: 45px; /* ロゴサイズを調整 */
         margin-right: 10px;
     }
     .site-title-area .site-title {
-        font-size: 2em; /* ★修正: サイトタイトルを調整 */
+        font-size: 2em; /* サイトタイトルを調整 */
     }
     .site-title-area .site-description {
-        font-size: 0.85em; /* ★修正: 説明文を調整 */
+        font-size: 0.85em; /* 説明文を調整 */
     }
     .beta-tag {
-        font-size: 0.45em; /* ★修正: β版タグを調整 */
+        font-size: 0.45em; /* β版タグを調整 */
         padding: 2px 7px;
     }
     .header-nav {
@@ -740,8 +740,8 @@ footer .footer-nav { /* HTMLのfooter navタグに直接適用するため変更
         gap: 10px; /* ナビボタン間のギャップを調整 */
     }
     .nav-button {
-        font-size: 0.95em; /* ★修正: ナビゲーションボタンのフォントサイズを調整 */
-        padding: 9px 18px; /* ★修正: ナビゲーションボタンのパディングを調整 */
+        font-size: 0.95em; /* ナビゲーションボタンのフォントサイズを調整 */
+        padding: 9px 18px; /* ナビゲーションボタンのパディングを調整 */
     }
     /* モーダル内のトップコンテンツはPC版に近い横並びを維持 */
     #movie-detail-modal #movie-detail-top-content {
@@ -763,138 +763,144 @@ footer .footer-nav { /* HTMLのfooter navタグに直接適用するため変更
 
 @media (max-width: 768px) {
     header {
-        padding: 10px 0; /* ★修正: ヘッダーの上下パディングをさらに減らす */
+        padding: 8px 0; /* ★さらに調整: ヘッダーの上下パディングを減らす */
     }
     .container {
-        padding: 0 10px; /* ★修正: 全体のコンテナのパディングをさらに減らす */
+        padding: 0 10px; /* 全体のコンテナのパディングをさらに減らす */
     }
     .site-branding {
-        margin-bottom: 8px; /* ★修正: ロゴとボタンの間の余白をさらに調整 */
+        margin-bottom: 6px; /* ★さらに調整: ロゴとボタンの間の余白を調整 */
     }
     .site-branding .logo {
-        height: 35px; /* ★修正: ロゴをさらに小さく */
-        margin-right: 8px;
+        height: 30px; /* ★さらに調整: ロゴをさらに小さく */
+        margin-right: 6px;
     }
     .site-title-area .site-title {
-        font-size: 1.4em; /* ★修正: サイトタイトルをさらに小さく */
+        font-size: 1.2em; /* ★さらに調整: サイトタイトルをさらに小さく */
     }
     .site-title-area .site-description {
-        font-size: 0.65em; /* ★修正: 説明文をさらに小さく */
+        font-size: 0.6em; /* ★さらに調整: 説明文をさらに小さく */
     }
     .beta-tag {
-        font-size: 0.3em; /* ★修正: β版タグをさらに小さく */
-        padding: 1px 4px;
+        font-size: 0.28em; /* ★さらに調整: β版タグをさらに小さく */
+        padding: 1px 3px;
     }
     .nav-button {
-        font-size: 0.75em; /* ★修正: ナビゲーションボタンのフォントサイズを調整 */
-        padding: 5px 10px; /* ★修正: ナビゲーションボタンのパディングを調整 */
+        font-size: 0.7em; /* ★さらに調整: ナビゲーションボタンのフォントサイズを調整 */
+        padding: 4px 9px; /* ★さらに調整: ナビゲーションボタンのパディングを調整 */
     }
 
     .search-bar {
-        width: 95%; /* ★修正: 画面幅に対して少し余白を持たせる */
-        max-width: 400px; /* ★修正: スマートフォンでの最大の幅を制限 */
+        width: 98%; /* 画面幅に対して少し余白を持たせる */
+        max-width: 380px; /* スマートフォンでの最大の幅を制限 */
         margin-left: auto; /* 中央揃え */
         margin-right: auto; /* 中央揃え */
+        gap: 8px; /* 検索バー要素間のギャップを調整 */
     }
     #search-input {
-        padding: 10px 15px; /* ★修正: 入力欄のパディングも調整 */
-        font-size: 0.9em;
+        padding: 9px 14px; /* 入力欄のパディングも調整 */
+        font-size: 0.85em;
     }
     #search-button {
-        padding: 10px 20px; /* ★修正: 検索ボタンのパディング */
-        font-size: 0.9em;
+        padding: 9px 18px; /* 検索ボタンのパディング */
+        font-size: 0.85em;
     }
 
     .movie-grid {
-        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); /* ★修正: カードサイズをさらに小さく */
-        gap: 15px;
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); /* カードサイズをさらに小さく */
+        gap: 12px; /* ギャップも小さく */
     }
     .movie-card img {
-        height: 240px; /* ★修正: カード画像高さを調整 */
+        height: 220px; /* カード画像高さを調整 */
     }
     .movie-card h3 {
-        font-size: 1.1em;
+        font-size: 1em;
     }
     .movie-card p {
-        font-size: 0.8em;
+        font-size: 0.75em;
     }
     #phobia-section h3, #phobia-form h3 {
-        font-size: 1.3em;
+        font-size: 1.2em;
     }
     #phobia-form input,
     #phobia-form textarea,
     #phobia-form button {
-        font-size: 0.85em;
-        padding: 8px;
+        font-size: 0.8em;
+        padding: 7px;
     }
     .footer-nav {
-        gap: 10px;
+        gap: 8px;
     }
     .footer-btn { 
-        padding: 8px 12px;
-        font-size: 0.8em;
+        padding: 7px 10px;
+        font-size: 0.75em;
     }
 }
 
 @media (max-width: 480px) {
     header {
-        padding: 8px 0; /* ★修正: ヘッダーの上下パディングを最も小さく */
+        padding: 5px 0; /* ★さらに調整: ヘッダーの上下パディングを最も小さく */
     }
     .site-branding {
-        margin-bottom: 5px; /* ★修正: ロゴとボタンの間の余白をさらに調整 */
+        margin-bottom: 3px; /* ★さらに調整: ロゴとボタンの間の余白をさらに調整 */
     }
     .site-branding .logo {
-        height: 30px; /* ★修正: ロゴを最も小さく */
-        margin-right: 5px;
+        height: 25px; /* ★さらに調整: ロゴを最も小さく */
+        margin-right: 4px;
     }
     .site-title-area .site-title {
-        font-size: 1.1em; /* ★修正: サイトタイトルを最も小さく */
+        font-size: 1em; /* ★さらに調整: サイトタイトルを最も小さく */
     }
     .site-title-area .site-description {
-        font-size: 0.6em; /* ★修正: 説明文を最も小さく */
+        font-size: 0.55em; /* ★さらに調整: 説明文を最も小さく */
     }
     .beta-tag {
-        font-size: 0.25em; /* ★修正: β版タグを最も小さく */
-        padding: 1px 3px;
+        font-size: 0.2em; /* ★さらに調整: β版タグを最も小さく */
+        padding: 1px 2px;
     }
     .nav-button {
-        font-size: 0.7em; /* ★修正: ナビゲーションボタンを最も小さく */
-        padding: 4px 8px;
+        font-size: 0.6em; /* ★さらに調整: ナビゲーションボタンを最も小さく */
+        padding: 3px 6px; /* ★さらに調整: ナビゲーションボタンのパディングを調整 */
     }
     .tab-btn {
-        font-size: 0.7em;
-        padding: 5px 8px;
+        font-size: 0.65em;
+        padding: 4px 7px;
     }
     .search-bar {
-        width: 95%; /* ★修正: 小さい画面でも横幅を維持 */
-        max-width: 320px; /* ★修正: さらに狭く */
+        width: 98%; /* 小さい画面でも横幅を維持 */
+        max-width: 280px; /* ★さらに狭く */
+        gap: 5px; /* 検索バー要素間のギャップをさらに調整 */
     }
     #search-input {
-        font-size: 0.8em;
-        padding: 8px 12px;
+        font-size: 0.75em;
+        padding: 7px 10px;
     }
     #search-button {
-        font-size: 0.8em;
-        padding: 8px 15px;
+        font-size: 0.75em;
+        padding: 7px 12px;
     }
     .movie-grid {
         grid-template-columns: 1fr; /* 1列表示 */
-        gap: 10px;
+        gap: 8px;
     }
     .movie-card img {
-        height: 280px; /* ★修正: 縦長に見えるように調整 */
+        height: 250px; /* 縦長に見えるように調整 */
     }
     .modal-content {
-        padding: 10px; /* ★修正: モーダルのパディングも小さく */
+        padding: 8px; /* モーダルのパディングも小さく */
     }
     #movie-detail-modal h2 {
-        font-size: 1.5em;
+        font-size: 1.3em;
     }
     #movie-detail-modal p {
         font-size: 0.85em;
     }
     .phobia-item {
-        font-size: 0.9em;
-        padding: 8px 12px;
+        font-size: 0.8em;
+        padding: 7px 10px;
+    }
+    .phobia-badge {
+        font-size: 0.6em;
+        padding: 2px 5px;
     }
 }
