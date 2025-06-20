@@ -11,6 +11,11 @@
 /* HTMLで<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">を追加してください */
 
 /* 基本スタイル */
+/* ★追加: box-sizingをborder-boxに設定し、パディングとボーダーを幅の内側に含める */
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
 body {
     font-family: 'Inter', sans-serif; /* Interをデフォルトにし、日本語は個別適用を推奨 */
     margin: 0;
