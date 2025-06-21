@@ -1,29 +1,31 @@
 // supabase/functions/submit-phobia-report/index.ts
-import { serve } from "https://deno.land/std@0.178.0/http/server.ts";
+import { serve } from "https://deno.land/std@0.178.0/http/server.ts"; // Deno.serve ではなく serve を使用
 
 // Edge Functionの起動時に一度だけ表示されるログ
 console.log("Edge Function 'submit-phobia-report' initialized.");
 
-serve(async (req) => {
+serve(async (req) => { // Deno.serve ではなく serve を使用
     // リクエストが来るたびに表示されるログ
     console.log("Received a new request.");
 
     const corsHeaders = {
         'Access-Control-Allow-Origin': '*', // すべてのオリジンからのアクセスを許可（開発用）
-        'Access-Control-Allow-Methods': 'POST, GET, OPTIONS', // 許可するメソッド
-        'Access-Control-Allow-Headers': 'Content-Type, Authorization, x-client-info, apikey',
+        'Access-Control-Allow-Methods': 'POST, GET, OPTIONS', // 許可するメソッドをPOST, GET, OPTIONSに拡大
+        'Access-Control-Allow-Headers': 'Content-Type, Authorization, x-client-info, apikey', // ヘッダーをより包括的に
         'Access-Control-Max-Age': '86400', // プリフライトリクエストのキャッシュ時間
     };
 
     // プリフライトリクエスト (OPTIONSメソッド) への対応
     if (req.method === 'OPTIONS') {
         console.log('Handling OPTIONS preflight request.');
-        return new Response(null, {
+        // 修正点: 204 No Content のレスポンスにはボディを含めない
+        return new Response(null, { // 'ok' ではなく null を指定
             status: 204,
             headers: corsHeaders,
         });
     }
 
+    // POSTリクエストのみを受け付ける
     if (req.method !== 'POST') {
         console.warn(`Method Not Allowed: ${req.method}`);
         return new Response(JSON.stringify({ error: "Method Not Allowed" }), {
@@ -33,20 +35,22 @@ serve(async (req) => {
     }
 
     try {
-        // ★★★ このオブジェクトのデストラクチャリングから「time」を削除しました ★★★
         const requestBody = await req.json();
-        const { movieId, phobias, otherPhobia, details } = requestBody; 
+        const { movieId, phobias, otherPhobia, details, time } = requestBody; 
 
-        console.log("Parsed request payload:", { movieId, phobias, otherPhobia, details });
+        console.log("Parsed request payload:", { movieId, phobias, otherPhobia, details, time });
 
+        // URLフィルタリング（モデレーション機能）
+        // https:// または http:// または www. から始まるURLを検出
         const hasUrl = (text: string | null | undefined) => {
             if (!text) return false;
             return /(https?:\/\/[^\s]+)|(www\.[^\s]+)/g.test(text);
         };
 
-        if (hasUrl(otherPhobia) || hasUrl(details)) {
-            console.warn(`[MODERATION BLOCKED] URL detected in submission for movie ID: ${movieId}`);
-            return new Response(JSON.stringify({ error: "投稿内容にURLが含まれています。URLの投稿はブロックされます。" }), {
+        if (hasUrl(otherPhobia) || hasUrl(details) || hasUrl(time)) {
+            console.warn(`[MODERATION BLOCKED] URL detected in report for movie ID: ${movieId}`);
+            // 修正点: 「報告」に統一
+            return new Response(JSON.stringify({ error: "報告内容にURLが含まれています。URLの報告はブロックされます。" }), {
                 status: 400,
                 headers: { "Content-Type": "application/json", ...corsHeaders },
             });
@@ -88,7 +92,7 @@ serve(async (req) => {
         }
 
         const properties: { [key: string]: any } = {
-            "映画ID": { // Notionデータベースの「タイトル」プロパティの名前
+            "映画ID": { 
                 title: [{ type: "text", text: { content: movieTitle } }], 
             },
             "恐怖要素": { 
@@ -100,14 +104,12 @@ serve(async (req) => {
             "詳細": { 
                 rich_text: [{ type: "text", text: { content: details || "" } }],
             },
-            // ★★★ ここから「出現時間」を完全に削除しました。今後、このプロパティはNotionへ送信されません。★★★
-            "ステータス": { // モデレーション用の初期ステータス
+            "出現時間": {
+                rich_text: [{ type: "text", text: { content: time || "" } }],
+            },
+            "ステータス": { 
                 select: { name: "Pending" }, 
             },
-            "情報源": {
-                select: { name: "ユーザー" }, // ユーザーからの投稿であることを示す
-            },
-            // 「投稿日時」はNotionの「Created time」タイプの場合、APIで設定不要です。
         };
         console.log("Notion properties payload:", JSON.stringify(properties, null, 2));
 
@@ -144,7 +146,8 @@ serve(async (req) => {
         }
 
         console.log("Phobia report successfully processed and sent to Notion.");
-        return new Response(JSON.stringify({ message: "投稿が成功しました！" }), {
+        // 修正点: 「報告」に統一
+        return new Response(JSON.stringify({ message: "報告が成功しました！" }), {
             status: 200,
             headers: { "Content-Type": "application/json", ...corsHeaders },
         });

@@ -2,7 +2,8 @@
 /* 日本語フォント: しねきゃぷしょん */
 @font-face {
     font-family: 'cinecaption';
-    src: url('../assets/fonts/cinecaption226.ttf') format('truetype');
+    /* ★★★ 修正点: フォントファイルのパスを 'assets/fonts/' ディレクトリに合うように変更しました ★★★ */
+    src: url('../assets/fonts/cinecaption226.ttf') format('truetype'); 
     font-weight: normal;
     font-style: normal;
 }
@@ -11,11 +12,6 @@
 /* HTMLで<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">を追加してください */
 
 /* 基本スタイル */
-/* ★追加: box-sizingをborder-boxに設定し、パディングとボーダーを幅の内側に含める */
-*, *::before, *::after {
-    box-sizing: border-box;
-}
-
 body {
     font-family: 'Inter', sans-serif; /* Interをデフォルトにし、日本語は個別適用を推奨 */
     margin: 0;
@@ -23,7 +19,6 @@ body {
     background-color: #f8f8f8; /* ボディは白に近いグレー */
     color: #333;
     line-height: 1.6;
-    overflow-x: hidden; /* ★修正: 横方向のスクロールを無効にする */
 }
 
 /* 日本語テキストにcinecaptionを適用するクラス/属性セレクタ */
@@ -47,10 +42,13 @@ body {
 header {
     background-color: #1a242f; /* 濃い青 */
     color: #ecf0f1;
-    padding: 25px 0; /* PC版での高さを維持 */
+    padding: 15px 0;
     box-shadow: 0 4px 10px rgba(0,0,0,0.3);
     border-bottom-left-radius: 15px; /* モダンレトロな角丸 */
     border-bottom-right-radius: 15px;
+    position: sticky;
+    top: 0;
+    z-index: 999;
 }
 
 header .header-container { /* HTMLのheader内のcontainerクラスに直接適用 */
@@ -670,7 +668,7 @@ footer .footer-nav { /* HTMLのfooter navタグに直接適用するため変更
     padding: 12px;
     margin-bottom: 18px;
     border: 2px solid #ccc; /* 太めの枠線 */
-    border-radius: 10px; /* ★修正：inputの角丸を10pxに統一 */
+    border-radius: 8px;
     font-size: 1em;
     box-shadow: inset 0 1px 4px rgba(0,0,0,0.08);
     font-family: 'Playfair Display', serif; /* 英語フォント */
@@ -679,6 +677,16 @@ footer .footer-nav { /* HTMLのfooter navタグに直接適用するため変更
 #phobia-details-text {
     min-height: 100px; /* 高さを確保 */
     resize: vertical;
+}
+
+/* ★★★ 追加: フォーム内のボタンを横並びにするコンテナスタイル ★★★ */
+.form-buttons-container {
+    display: flex;
+    gap: 15px; /* ボタン間のスペース */
+    justify-content: center; /* 中央揃え */
+    align-items: center;
+    margin-top: 20px;
+    flex-wrap: wrap; /* スマホ表示で折り返す */
 }
 
 #phobia-form button[type="submit"] {
@@ -700,6 +708,22 @@ footer .footer-nav { /* HTMLのfooter navタグに直接適用するため変更
     box-shadow: 0 6px 12px rgba(0,0,0,0.3);
 }
 
+/* Xシェアボタンのスタイル (既存の.btnに加えて) */
+.share-x-btn {
+    background-color: #000; /* Xのブランドカラー */
+    color: white;
+    padding: 14px 20px; /* 報告するボタンと高さを合わせる */
+    border-radius: 10px;
+    font-size: 1.1em;
+    font-family: 'Playfair Display', serif; /* Xのロゴなので英語フォントが自然 */
+}
+
+.share-x-btn:hover {
+    background-color: #333;
+    transform: translateY(-2px);
+}
+
+
 #phobia-form #form-message {
     margin-top: 15px;
     font-size: 0.95em;
@@ -711,46 +735,23 @@ footer .footer-nav { /* HTMLのfooter navタグに直接適用するため変更
 
 /* レスポンシブ調整 */
 @media (max-width: 900px) {
-    header {
-        padding: 15px 0; /* ヘッダーの上下パディングを調整 */
-    }
     .header-container {
         flex-direction: column;
         text-align: center;
     }
     .site-branding {
         margin-right: 0;
-        margin-bottom: 10px; /* ロゴとボタンの間の余白を調整 */
-    }
-    .site-branding .logo {
-        height: 45px; /* ロゴサイズを調整 */
-        margin-right: 10px;
-    }
-    .site-title-area .site-title {
-        font-size: 2em; /* サイトタイトルを調整 */
-    }
-    .site-title-area .site-description {
-        font-size: 0.85em; /* 説明文を調整 */
-    }
-    .beta-tag {
-        font-size: 0.45em; /* β版タグを調整 */
-        padding: 2px 7px;
+        margin-bottom: 15px;
     }
     .header-nav {
         justify-content: center;
         width: 100%;
-        gap: 10px; /* ナビボタン間のギャップを調整 */
-        margin-bottom: 15px; /* ★追加: ヘッダーのナビゲーションボタンの下に余白を追加 */
     }
-    .nav-button {
-        font-size: 0.95em; /* ナビゲーションボタンのフォントサイズを調整 */
-        padding: 9px 18px; /* ナビゲーションボタンのパディングを調整 */
-    }
-    /* モーダル内のトップコンテンツはPC版に近い横並びを維持 */
+    /* ★修正: モーダル内のトップコンテンツを横並び維持（折り返しは許可） */
     #movie-detail-modal #movie-detail-top-content {
-        flex-direction: row; 
-        align-items: flex-start; 
-        text-align: left; 
+        flex-direction: row; /* カラムではなく横並びを維持 */
+        align-items: flex-start; /* 上揃えに戻す */
+        text-align: left; /* テキスト揃えも戻す */
         gap: 20px;
     }
     #movie-detail-modal #movie-detail-poster img {
@@ -761,174 +762,289 @@ footer .footer-nav { /* HTMLのfooter navタグに直接適用するため変更
     }
     .modal-content {
         padding: 25px;
-        /* ★修正: モーダルの最大幅と高さを調整 */
-        max-width: 90vw; 
-        max-height: 80vh; /* 少し高さを小さく */
     }
 }
 
 @media (max-width: 768px) {
-    header {
-        padding: 8px 0; /* ヘッダーの上下パディングを減らす */
-    }
     .container {
-        padding: 0 10px; /* 全体のコンテナのパディングをさらに減らす */
+        padding: 0 15px;
     }
-    .site-branding {
-        margin-bottom: 4px; /* ロゴとボタンの間の余白を調整 */
-    }
-    .site-branding .logo {
-        height: 30px; /* ロゴをさらに小さく */
-        margin-right: 6px;
-    }
-    .site-title-area .site-title {
-        font-size: 1.2em; /* サイトタイトルをさらに小さく */
-    }
-    .site-title-area .site-description {
-        font-size: 0.6em; /* 説明文をさらに小さく */
+    .site-title-area h1 {
+        font-size: 1.8em;
     }
     .beta-tag {
-        font-size: 0.28em; /* β版タグをさらに小さく */
-        padding: 1px 3px;
+        font-size: 0.4em;
+        padding: 2px 6px;
     }
-    .header-nav {
-        width: 100%; /* 確実に幅を100%に */
-        flex-direction: column; /* ボタンを縦に並べる */
-        align-items: center; /* 縦並びのボタンを中央寄せ */
-        gap: 1px; /* ★修正: 縦並びのボタン間のギャップをさらに狭める */
-        margin-bottom: 10px; /* ★追加: ヘッダーのナビゲーションボタンの下に余白を追加 */
+    .nav-button, .action-button, .tab-btn, .feature-btn { /* footer-link-button は footer-btn に変更されたため注意 */
+        font-size: 0.9em;
+        padding: 8px 15px;
     }
-    .nav-button {
-        font-size: 0.7em; /* ナビゲーションボタンのフォントサイズを調整 */
-        padding: 4px 9px; /* ナビゲーションボタンのパディングを調整 */
-    }
-
     .search-bar {
-        width: calc(100% - 20px); /* 画面幅に対して少し余白を持たせる */
-        max-width: 380px; /* スマートフォンでの最大の幅を制限 */
-        margin-left: auto; /* 中央揃え */
-        margin-right: auto; /* 中央揃え */
-        gap: 8px; /* 検索バー要素間のギャップを調整 */
+        flex-direction: column;
+        gap: 10px;
     }
-    #search-input {
-        padding: 9px 14px; /* 入力欄のパディングも調整 */
-        font-size: 0.85em;
+    #search-input, #search-button {
+        width: 100%;
+        max-width: none;
     }
-    #search-button {
-        padding: 9px 18px; /* 検索ボタンのパディング */
-        font-size: 0.85em;
-    }
-
     .movie-grid {
-        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); /* カードサイズをさらに小さく */
-        gap: 12px; /* ギャップも小さく */
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+        gap: 20px;
     }
     .movie-card img {
-        height: 220px; /* カード画像高さを調整 */
+        height: 270px;
     }
-    .movie-card h3 {
-        font-size: 1em;
+    #phobia-section h3 {
+        font-size: 1.5em;
     }
-    .movie-card p {
-        font-size: 0.75em;
-    }
-    #phobia-section h3, #phobia-form h3 {
-        font-size: 1.2em;
+    #phobia-form h3 {
+        font-size: 1.4em;
     }
     #phobia-form input,
-    #phobia-form textarea,
-    #phobia-form button {
-        font-size: 0.8em;
-        padding: 7px;
+    #phobia-form textarea {
+        font-size: 0.9em;
+        padding: 10px;
+    }
+    /* ボタンコンテナもここで調整 */
+    .form-buttons-container {
+        flex-direction: column; /* 縦並びに戻す */
+        gap: 10px;
+    }
+    #phobia-form button[type="submit"],
+    .share-x-btn {
+        width: 100%; /* 幅いっぱいに広げる */
+        padding: 12px 20px;
+        font-size: 1em;
     }
     .footer-nav {
-        gap: 8px;
+        gap: 10px;
     }
-    .footer-btn { 
-        padding: 7px 10px;
-        font-size: 0.75em;
-    }
-    .modal-content {
-        padding: 10px; /* ★修正：モーダルのパディングを調整 */
-        max-width: 95vw; /* ★修正：モーダルの最大幅を調整 */
-        max-height: 80vh; /* モーダルの最大高さを調整 */
+    .footer-btn { /* footer-link-button を footer-btn に変更 */
+        padding: 8px 12px;
+        font-size: 0.8em;
     }
 }
 
 @media (max-width: 480px) {
-    header {
-        padding: 5px 0; /* ヘッダーの上下パディングを最も小さく */
+    .site-title-area h1 {
+        font-size: 1.5em;
     }
-    .container {
-        padding: 0 5px; /* ★修正: 全体のコンテナのパディングをさらに狭める */
+    .logo {
+        height: 40px;
+        margin-right: 10px;
     }
-    .site-branding {
-        margin-bottom: 2px; /* ロゴとボタンの間の余白をさらに調整 */
-    }
-    .site-branding .logo {
-        height: 25px; /* ロゴを最も小さく */
-        margin-right: 4px;
-    }
-    .site-title-area .site-title {
-        font-size: 1em; /* サイトタイトルを最も小さく */
-    }
-    .site-title-area .site-description {
-        font-size: 0.55em; /* 説明文を最も小さく */
-    }
-    .beta-tag {
-        font-size: 0.2em; /* β版タグを最も小さく */
-        padding: 1px 2px;
-    }
-    .header-nav {
-        gap: 0px; /* ★修正: 縦並びのボタン間のギャップをさらに狭める (0px) */
-        margin-bottom: 8px; /* ★追加: ヘッダーのナビゲーションボタンの下に余白を追加 */
+    .site-description {
+        font-size: 0.8em;
     }
     .nav-button {
-        font-size: 0.6em; /* ナビゲーションボタンを最も小さく */
-        padding: 3px 6px; /* ナビゲーションボタンのパディングを調整 */
+        font-size: 0.8em;
+        padding: 6px 10px;
     }
     .tab-btn {
-        font-size: 0.65em;
-        padding: 4px 7px;
-    }
-    .search-bar {
-        width: calc(100% - 10px); /* 小さい画面でも横幅を維持 */
-        max-width: 280px; /* さらに狭く */
-        gap: 5px; /* 検索バー要素間のギャップをさらに調整 */
-    }
-    #search-input {
-        font-size: 0.75em;
-        padding: 7px 10px;
-        min-width: unset; /* ★追加: 最小幅を解除してより柔軟に縮小できるようにする */
-    }
-    #search-button {
-        font-size: 0.75em;
-        padding: 7px 12px;
+        font-size: 0.8em;
+        padding: 6px 10px;
     }
     .movie-grid {
         grid-template-columns: 1fr; /* 1列表示 */
-        gap: 8px;
+        gap: 15px;
     }
     .movie-card img {
-        height: 250px; /* 縦長に見えるように調整 */
-    }
-    .modal-content {
-        padding: 5px; /* ★修正: モーダルのパディングも小さく */
-        max-width: 98vw; /* ★修正: モーダルの最大幅を画面幅にさらに合わせる */
-        max-height: 90vh; /* モーダルの最大高さを調整 */
+        height: 300px;
     }
     #movie-detail-modal h2 {
-        font-size: 1.3em;
+        font-size: 1.8em;
     }
     #movie-detail-modal p {
-        font-size: 0.85em;
+        font-size: 0.9em;
     }
     .phobia-item {
-        font-size: 0.8em;
-        padding: 7px 10px;
+        font-size: 1em;
+        padding: 10px 15px;
     }
     .phobia-badge {
-        font-size: 0.6em;
-        padding: 2px 5px;
+        font-size: 0.7em;
+        padding: 3px 6px;
+    }
+    .modal-content {
+        padding: 15px;
+    }
+
+    /* ★追加: モーダルのポスターと情報をカラム表示に戻す (一番小さい画面サイズのみ) */
+    #movie-detail-modal #movie-detail-top-content {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+}
+/* =================================================================================
+ * Button Specific Styles (Minimal & Targeted)
+ * Please add these rules to your existing style.css, or replace only the relevant button styles.
+ * ================================================================================= */
+
+/* Common button base styles for hover effect and shadow */
+/* If you have a .btn class or similar, merge these properties into it. */
+.btn {
+    cursor: pointer;
+    border: none;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.btn:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Search bar button */
+.search-bar button {
+    background-color: #3498db;
+    color: white;
+    padding: 10px 20px;
+    /* Apply common button styles */
+    cursor: pointer;
+    border: none;
+    border-radius: 8px;
+    font-size: 1em;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.search-bar button:hover {
+    background-color: #2980b9;
+    opacity: 0.9;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Movie category tabs buttons */
+.movie-category-tabs .tab-btn {
+    background-color: #ecf0f1;
+    color: #34495e;
+    padding: 12px 25px;
+    font-weight: 600;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    /* Apply common button styles */
+    cursor: pointer;
+    border: none;
+    border-radius: 8px;
+    font-size: 1em;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.movie-category-tabs .tab-btn.active,
+.movie-category-tabs .tab-btn:hover {
+    background-color: #3498db;
+    color: white;
+    opacity: 0.9;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Form buttons container */
+.form-buttons-container {
+    display: flex;
+    flex-wrap: wrap; /* Allow buttons to wrap on smaller screens */
+    gap: 15px; /* Space between buttons */
+    align-items: center; /* Vertically align items */
+    justify-content: flex-start; /* Left-align buttons */
+    margin-top: 20px;
+}
+
+/* Phobia report submit button */
+#phobia-form button[type="submit"] {
+    background-color: #2ecc71;
+    color: white;
+    padding: 12px 25px;
+    font-size: 1.05em;
+    min-width: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 45px; /* Fixed height */
+    line-height: 1; /* Adjust text line height */
+    /* Apply common button styles */
+    cursor: pointer;
+    border: none;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#phobia-form button[type="submit"]:hover {
+    background-color: #27ae60;
+    opacity: 0.9;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* X (Twitter) share button */
+.share-x-btn {
+    background-color: #000;
+    color: white;
+    padding: 12px 20px;
+    font-size: 1.5em; /* Larger X character */
+    font-weight: bold;
+    min-width: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 45px; /* Fixed height */
+    line-height: 1; /* Adjust X character line height */
+    /* Apply common button styles */
+    cursor: pointer;
+    border: none;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.share-x-btn:hover {
+    background-color: #333;
+    opacity: 0.9;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* AI Diagnosis button */
+.ai-diagnosis-btn {
+    background-color: #9b59b6; /* Purple color */
+    color: white;
+    padding: 12px 25px;
+    font-size: 1.05em;
+    min-width: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 45px; /* Fixed height */
+    line-height: 1;
+    /* Apply common button styles */
+    cursor: pointer;
+    border: none;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.ai-diagnosis-btn:hover {
+    background-color: #8e44ad;
+    opacity: 0.9;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Responsive adjustments for buttons on smaller screens */
+@media (max-width: 480px) {
+    .form-buttons-container {
+        flex-direction: column; /* Stack buttons vertically */
+        align-items: stretch; /* Stretch buttons to full width */
+    }
+    #phobia-form button[type="submit"],
+    .share-x-btn,
+    .ai-diagnosis-btn {
+        width: 100%; /* Make buttons full width */
+        margin: 0; /* Reset margins */
     }
 }
