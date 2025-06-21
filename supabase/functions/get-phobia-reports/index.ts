@@ -147,7 +147,6 @@ serve(async (req) => { // Deno.serve ではなく serve を使用
             const phobias = page.properties["恐怖要素"]?.multi_select || [];
             const otherPhobia = page.properties["その他恐怖要素"]?.rich_text[0]?.plain_text || "";
             const details = page.properties["詳細"]?.rich_text[0]?.plain_text || "";
-            // 修正点: 「出現時間」の取得を削除しました
             const source = page.properties["情報源"]?.select?.name || "不明"; // 修正点: 「情報源」の取得を追加しました
 
             phobias.forEach((phobia: { name: string }) => {

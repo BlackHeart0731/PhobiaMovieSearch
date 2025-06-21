@@ -1,31 +1,29 @@
 // supabase/functions/submit-phobia-report/index.ts
-import { serve } from "https://deno.land/std@0.178.0/http/server.ts"; // Deno.serve ではなく serve を使用
+import { serve } from "https://deno.land/std@0.178.0/http/server.ts";
 
 // Edge Functionの起動時に一度だけ表示されるログ
 console.log("Edge Function 'submit-phobia-report' initialized.");
 
-serve(async (req) => { // Deno.serve ではなく serve を使用
+serve(async (req) => {
     // リクエストが来るたびに表示されるログ
     console.log("Received a new request.");
 
     const corsHeaders = {
         'Access-Control-Allow-Origin': '*', // すべてのオリジンからのアクセスを許可（開発用）
-        'Access-Control-Allow-Methods': 'POST, GET, OPTIONS', // 許可するメソッドをPOST, GET, OPTIONSに拡大
-        'Access-Control-Allow-Headers': 'Content-Type, Authorization, x-client-info, apikey', // ヘッダーをより包括的に
+        'Access-Control-Allow-Methods': 'POST, GET, OPTIONS', // 許可するメソッド
+        'Access-Control-Allow-Headers': 'Content-Type, Authorization, x-client-info, apikey',
         'Access-Control-Max-Age': '86400', // プリフライトリクエストのキャッシュ時間
     };
 
     // プリフライトリクエスト (OPTIONSメソッド) への対応
     if (req.method === 'OPTIONS') {
         console.log('Handling OPTIONS preflight request.');
-        // 修正点: 204 No Content のレスポンスにはボディを含めない
-        return new Response(null, { // 'ok' ではなく null を指定
+        return new Response(null, {
             status: 204,
             headers: corsHeaders,
         });
     }
 
-    // POSTリクエストのみを受け付ける
     if (req.method !== 'POST') {
         console.warn(`Method Not Allowed: ${req.method}`);
         return new Response(JSON.stringify({ error: "Method Not Allowed" }), {
@@ -35,11 +33,10 @@ serve(async (req) => { // Deno.serve ではなく serve を使用
     }
 
     try {
-        // 修正点: requestBodyからtimeを削除しました
+        // ★★★ このオブジェクトのデストラクチャリングから「time」を削除しました ★★★
         const requestBody = await req.json();
         const { movieId, phobias, otherPhobia, details } = requestBody; 
 
-        // 修正点: console.logからtimeを削除しました
         console.log("Parsed request payload:", { movieId, phobias, otherPhobia, details });
 
         const hasUrl = (text: string | null | undefined) => {
@@ -47,8 +44,7 @@ serve(async (req) => { // Deno.serve ではなく serve を使用
             return /(https?:\/\/[^\s]+)|(www\.[^\s]+)/g.test(text);
         };
 
-        // 修正点: URLフィルタリングからtimeを削除しました
-        if (hasUrl(otherPhobia) || hasUrl(details)) { // timeのフィルタリングを削除
+        if (hasUrl(otherPhobia) || hasUrl(details)) {
             console.warn(`[MODERATION BLOCKED] URL detected in submission for movie ID: ${movieId}`);
             return new Response(JSON.stringify({ error: "投稿内容にURLが含まれています。URLの投稿はブロックされます。" }), {
                 status: 400,
@@ -104,14 +100,14 @@ serve(async (req) => { // Deno.serve ではなく serve を使用
             "詳細": { 
                 rich_text: [{ type: "text", text: { content: details || "" } }],
             },
-            // 修正点: 「出現時間」のプロパティを削除しました
+            // ★★★ ここから「出現時間」を完全に削除しました。今後、このプロパティはNotionへ送信されません。★★★
             "ステータス": { // モデレーション用の初期ステータス
                 select: { name: "Pending" }, 
             },
-            // 修正点: 「情報源」プロパティを追加しました
             "情報源": {
-                select: { name: "ユーザー" },
+                select: { name: "ユーザー" }, // ユーザーからの投稿であることを示す
             },
+            // 「投稿日時」はNotionの「Created time」タイプの場合、APIで設定不要です。
         };
         console.log("Notion properties payload:", JSON.stringify(properties, null, 2));
 

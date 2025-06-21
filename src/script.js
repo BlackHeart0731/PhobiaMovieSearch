@@ -271,21 +271,18 @@ async function openMovieDetailModal(movieId) {
                 <p lang="ja"><strong>ジャンル:</strong> ${genres}</p>
             </div>
         </div>
-        <div style="border-top: 1px solid #eee; margin: 20px 0;"></div> <!-- Separator line -->
-        <div id="phobia-section">
+        <div style="border-top: 1px solid #eee; margin: 20px 0;"></div> <div id="phobia-section">
             <h3 lang="ja">報告されている恐怖要素</h3>
             <div id="phobia-reports-list">
                 ${generatePhobiaReportsHTML(phobiaReports)}
             </div>
-            <div style="border-top: 1px solid #eee; margin: 20px 0;"></div> <!-- Separator line -->
-            <form id="phobia-form" data-movie-id="${movieId}">
+            <div style="border-top: 1px solid #eee; margin: 20px 0;"></div> <form id="phobia-form" data-movie-id="${movieId}">
                 <h3 lang="ja">恐怖要素を投稿する</h3>
                 <div id="phobia-select-container">
                     ${generatePhobiaCheckboxes()}
                 </div>
                 <input type="text" id="phobia-other-text" placeholder="「その他」を選択した場合、内容を記入" lang="ja">
                 <textarea id="phobia-details-text" placeholder="詳細（任意）：どのシーンで、どのような描写だったかなど" lang="ja"></textarea>
-                <!-- 「出現時間」の入力フィールドを削除しました -->
                 <button type="submit" lang="ja">投稿する</button>
                 <p id="form-message" style="margin-top: 10px;"></p>
             </form>
@@ -434,14 +431,14 @@ async function handlePhobiaFormSubmit(event) {
     const selectedPhobias = Array.from(form.querySelectorAll('input[name="phobia"]:checked')).map(cb => cb.value);
     const otherText = document.getElementById('phobia-other-text').value.trim();
     const detailsText = document.getElementById('phobia-details-text').value.trim();
-    // 「出現時間」の取得は削除しました
+    // ★★★ 修正点: 「出現時間」の取得を完全に削除しました ★★★
 
     const formMessage = document.getElementById('form-message');
 
     // URL filtering for submission content (moderation feature)
     const hasUrl = (text) => /(https?:\/\/[^\s]+)/g.test(text || ''); // null/undefinedチェックを追加しました
 
-    // 「出現時間」のURLフィルタリングを削除しました
+    // ★★★ 修正点: 「出現時間」のURLフィルタリングを完全に削除しました ★★★
     if (hasUrl(otherText) || hasUrl(detailsText)) {
         formMessage.style.color = 'red';
         formMessage.innerText = '投稿内容にURLが含まれています。URLの投稿はブロックされます。';
@@ -460,7 +457,7 @@ async function handlePhobiaFormSubmit(event) {
         phobias: selectedPhobias,
         otherPhobia: otherText,
         details: detailsText,
-        // 「出現時間」と「情報源」のペイロードへの追加はEdge Function側で処理されます。
+        // ★★★ 修正点: 「出現時間」のペイロードへの追加を完全に削除しました ★★★
     };
 
     try {
@@ -498,7 +495,7 @@ async function handlePhobiaFormSubmit(event) {
 
 // =================================================================================
 // Event Listener Setup
-// =================================================================================
+//=================================================================================
 document.addEventListener('DOMContentLoaded', () => {
     resetAndLoadMovies(); // Load initial movies on page load
 });
@@ -559,7 +556,7 @@ modalOverlay.addEventListener('click', (e) => {
 
 // ★★★ Footer Popup Content (User-specified content stored here) ★★★
 const INFO_CONTENT = {
-    'about': { title: 'サイト説明', body: `「フォビアムービーサーチ」は、フォビア（恐怖症）を持つ方が映画を選ぶ際に、 事前に恐怖要素を確認できるサイトです。<br>様々な恐怖症（高所恐怖症、閉所恐怖症、蜘蛛恐怖症など）を持つ方が、 安心して映画を楽しめるよう、映画に含まれる可能性のある恐怖要素を表示しています。<br>このサイトは皆様からの情報提供によって成り立っています。映画の恐怖要素について 知っていることがあれば、ぜひ情報を追加してください。<br><br>※注意事項：<br>・日本で公開されていない海外の映画も含まれている場合があります。<br>・日本の公開日と海外の公開日が混在しているため、公開時期の表記に重複やズレが生じることがあります。<br>・恐怖要素の情報はユーザー投稿を中心に構成していますが、**サイトの初期段階におけるデータ補完として、AIによる分析データの導入も検討しており、より多くの映画情報を提供していく予定です。** AIデータはあくまで参考情報としてご利用ください。<br>・恐怖要素の情報はユーザー投稿を中心に構成しているため、内容に差異があることがあります。` },
+    'about': { title: 'サイト説明', body: `「フォビアムービーサーチ」は、フォビア（恐怖症）を持つ方が映画を選ぶ際に、 事前に恐怖要素を確認できるサイトです。<br>様々な恐怖症（高所恐怖症、閉所恐怖症、蜘蛛恐怖症など）を持つ方が、 安心して映画を楽しめるよう、映画に含まれる可能性のある恐怖要素を表示しています。<br>このサイトは皆様からの情報提供によって成り立っています。映画の恐怖要素について 知っていることがあれば、ぜひ情報を追加してください。<br><br>※注意事項：<br>・日本で公開されていない海外の映画も含まれている場合があります。<br>・日本の公開日と海外の公開日が混在しているため、公開時期の表記に重複やズレが生じることがあります。<br>・恐怖要素の情報はユーザー投稿を中心に構成しているため、内容に差異があることがあります。` },
     'disclaimer': { title: '免責事項', body: `当サイトに掲載されている恐怖要素の情報は、ユーザーからの投稿に基づいています。 情報の正確性は保証できませんので、あくまで参考程度にご利用ください。<br>・投稿内容は運営の判断で予告なく修正・削除する場合があります。<br>・映画の恐怖要素を説明する過程で、ネタバレを含む可能性があります。 映画の内容を知りたくない方はご注意ください。<br>・当サイトの利用によって生じたいかなる損害についても、運営者は責任を負いません。` },
     'privacy': { title: 'プライバシーポリシー', body: `1. 収集する情報<br>当サイトでは、サイト改善のために匿名の利用統計情報を収集することがあります。 また、投稿機能を利用する際に入力された情報を保存します。<br><br>2. 情報の利用目的<br>収集した情報は、サイトの改善、コンテンツの充実、およびユーザー体験の向上のために利用します。<br><br>3. 第三者への提供<br>法令に基づく場合を除き、収集した個人情報を第三者に提供することはありません。<br><br>4. Cookieの使用<br>当サイトでは、ユーザー体験向上のためにCookieを使用しています。 ブラウザの設定でCookieを無効にすることも可能です。<br><br>5. 広告について<br>当サイトではGoogle AdSenseを利用しており、 ユーザーの興味に基づいた広告が表示されることがあります。` },
     'guideline': { title: '投稿ガイドライン', body: `<h3>投稿の目的</h3>\n恐怖症を持つ方が安心して映画を選べるよう、正確で役立つ情報の提供にご協力ください。<br><br><h3>投稿時の注意点</h3>\n・実際に視聴した映画についてのみ投稿してください。<br>・恐怖要素の詳細は具体的に記入してください（例：「高所シーンあり」ではなく「30分頃、高いビルの屋上からの視点で撮影されたシーンが約2分間続く」など）。<br>・ネタバレになる可能性がある場合は、その旨を明記してください。<br>・出現時間は分かる範囲で記入してください（任意）。<br><br><h3>禁止事項</h3>\n・虚偽の情報の投稿<br>・映画の内容と関係のない投稿<br>・誹謗中傷や差別的な表現を含む投稿<br>・著作権を侵害する内容の投稿<br>・広告や宣伝目的の投稿` },
